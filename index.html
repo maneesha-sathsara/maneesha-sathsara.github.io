@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Maneesha Sathsara - AI Engineer Profile." />
+  <meta name="keywords" content="Maneesha Sathsara, AI Engineer, Machine Learning, Deep Learning, Python, PyTorch, Portfolio" />
+  <meta name="author" content="Maneesha Sathsara" />
+  <meta property="og:title" content="Maneesha Sathsara | AI Engineer" />
+  <meta property="og:description" content="AI Engineer specializing in Machine Learning, Deep Learning, and intelligent solutions." />
+  <meta property="og:type" content="website" />
+  <title>Maneesha Sathsara | AI Engineer</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════ PRELOADER ═══ -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <div class="ai-logo ai-animated-logo reveal">
+        <i class="fas fa-brain logo-icon"></i>
+        <span class="logo-text" style="font-size: 0.8em;">MS DEV</span>
+      </div>
+      <div class="preloader-bar"><div class="preloader-fill"></div></div>
+      <p class="preloader-label">Initializing Neural Network...</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ NAVBAR ═══ -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo ai-animated-logo">
+        <i class="fas fa-brain logo-icon"></i>
+        <span class="logo-text">MS DEV</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+        <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+        <li><a href="#certifications" class="nav-link" data-section="certifications">Certs</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Hire Me</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════ HERO ═══ -->
+  <section id="home" class="hero">
+    <canvas id="particleCanvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Available for Opportunities
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-greeting">Hello, I'm</span>
+          <span class="hero-name">Maneesha Sathsara</span>
+        </h1>
+        <div class="hero-role">
+          <span class="role-prefix">I build </span>
+          <span class="typewriter" id="typewriter"></span>
+          <span class="cursor">|</span>
+        </div>
+        <p class="hero-description">
+          Highly motivated Undergraduate pursuing dual degrees in Physical Science (Statistics & CS) and Information Technology. 
+          Specialized in <strong>Machine Learning</strong>, <strong>Full Stack Development</strong>, and <strong>AI</strong>.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number" data-target="1">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Years Exp.</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="5">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="4">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Certifications</span>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fas fa-rocket"></i> View Projects
+          </a>
+          <a href="Maneesha_Sathsara_CV.pdf" download class="btn btn-secondary">
+            <i class="fas fa-download"></i> Download CV
+          </a>
+          <a href="#contact" class="btn btn-ghost">
+            <i class="fas fa-envelope"></i> Contact Me
+          </a>
+        </div>
+        <div class="hero-social">
+          <a href="https://github.com/maneeshasathsaradev" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/maneesha-sathsara-02467938b" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://x.com/maneeshasmdev" target="_blank" rel="noopener" class="social-icon" aria-label="X">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+        </div>
+      </div>
+      <div class="hero-image-container">
+        <div class="hero-image-glow"></div>
+        <div class="hero-image-ring ring-1"></div>
+        <div class="hero-image-ring ring-2"></div>
+        <div class="hero-image-ring ring-3"></div>
+        <img src="profile.jpg" alt="Maneesha Sathsara" class="hero-photo" id="heroPhoto" />
+        <div class="floating-badge badge-pytorch">Machine Learning</div>
+        <div class="floating-badge badge-llm">Full Stack</div>
+        <div class="floating-badge badge-cv">AI</div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Scroll Down</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ ABOUT ═══ -->
+  <section id="about" class="section about-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// 01. About</span>
+        <h2 class="section-title">Who Am I?</h2>
+        <p class="section-subtitle">Leveraging statistical expertise and software engineering skills to build intelligent systems.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p class="about-lead">
+            I'm <strong>Maneesha Sathsara</strong>, a highly motivated undergraduate pursuing dual degrees in Physical Science (Statistics & CS) at the University of Kelaniya and Information Technology at UCSC.
+          </p>
+          <p>
+            I specialize in Machine Learning, Full Stack Development, and AI, with practical experience in predictive modeling and NLP. My goal is to leverage my statistical expertise and software engineering skills to build impactful and intelligent systems.
+          </p>
+          <p>
+            I'm particularly passionate about bridging the gap between advanced analytical models and scalable software solutions, creating seamless integrations that genuinely solve real-world problems.
+          </p>
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <i class="fas fa-brain"></i>
+              <div>
+                <strong>AI & Machine Learning</strong>
+                <span>TensorFlow, Scikit-learn, Pandas, NLP, Prompt Engineering</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <i class="fas fa-code"></i>
+              <div>
+                <strong>Full Stack Development</strong>
+                <span>React.js, Node.js, Express.js, REST APIs, JavaScript</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <i class="fas fa-shield-alt"></i>
+              <div>
+                <strong>Cybersecurity Enthusiast</strong>
+                <span>ISC2 Candidate (Pursuing Certified in Cybersecurity)</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-actions">
+            <a href="Maneesha_Sathsara_CV.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> Download CV</a>
+            <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
+          </div>
+        </div>
+        <div class="about-info reveal reveal-delay">
+          <div class="info-card">
+            <h3>Quick Info</h3>
+            <ul class="info-list">
+              <li><span class="info-label"><i class="fas fa-map-marker-alt"></i> Location</span><span>Sri Lanka</span></li>
+              <li><span class="info-label"><i class="fas fa-envelope"></i> Email</span><span>maneeshasathsaradev@gmail.com</span></li>
+              <li><span class="info-label"><i class="fas fa-phone"></i> Phone</span><span>+94 775691683</span></li>
+              <li><span class="info-label"><i class="fas fa-briefcase"></i> Status</span><span class="status-open"><span class="dot"></span>Available for Opportunities</span></li>
+              <li><span class="info-label"><i class="fas fa-graduation-cap"></i> Degree</span><span>BSc (UoK) & BIT (UCSC)</span></li>
+            </ul>
+          </div>
+          <div class="about-tools">
+            <h3>Tools I Work With</h3>
+            <div class="tools-grid">
+              <span class="tool-tag">Python</span>
+              <span class="tool-tag">PyTorch</span>
+              <span class="tool-tag">TensorFlow</span>
+              <span class="tool-tag">Hugging Face</span>
+              <span class="tool-tag">LangChain</span>
+              <span class="tool-tag">OpenCV</span>
+              <span class="tool-tag">SQL</span>
+              <span class="tool-tag">Git/GitHub</span>
+              <span class="tool-tag">Azure Cloud</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ SKILLS ═══ -->
+  <section id="skills" class="section skills-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// 02. Skills</span>
+        <h2 class="section-title">Technical Expertise</h2>
+        <p class="section-subtitle">A robust technical foundation bridging software engineering and machine learning.</p>
+      </div>
+
+      <div class="skills-categories reveal">
+        <div class="skill-category">
+          <div class="category-header">
+            <span class="category-icon"><i class="fas fa-brain"></i></span>
+            <h3>AI & Deep Learning</h3>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>TensorFlow & Scikit-learn</span><span class="skill-pct">90%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>LLMs & GenAI</span><span class="skill-pct">85%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>NLP & Text Processing</span><span class="skill-pct">88%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Predictive Modeling</span><span class="skill-pct">85%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="category-header">
+            <span class="category-icon"><i class="fas fa-server"></i></span>
+            <h3>MLOps & Data</h3>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Data Pipelines (Pandas/NumPy)</span><span class="skill-pct">90%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Model Deployment</span><span class="skill-pct">80%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="80"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>SQL / Databases</span><span class="skill-pct">85%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Azure Cloud</span><span class="skill-pct">75%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="75"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="category-header">
+            <span class="category-icon"><i class="fas fa-code"></i></span>
+            <h3>Software Engineering</h3>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Python</span><span class="skill-pct">95%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Full Stack (React/Node)</span><span class="skill-pct">85%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>REST APIs</span><span class="skill-pct">85%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>JavaScript (ES6+)</span><span class="skill-pct">85%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech Stack Grid -->
+      <div class="tech-stack-section reveal">
+        <h3 class="tech-stack-title">Technologies & Tools</h3>
+        <div class="tech-grid">
+          <div class="tech-card" title="Python"><div class="tech-icon">🐍</div><span>Python</span></div>
+          <div class="tech-card" title="TensorFlow"><div class="tech-icon">🧠</div><span>TensorFlow</span></div>
+          <div class="tech-card" title="Scikit-learn"><div class="tech-icon">📈</div><span>Scikit-learn</span></div>
+          <div class="tech-card" title="NLP"><div class="tech-icon">🗣️</div><span>NLP</span></div>
+          <div class="tech-card" title="Pandas"><div class="tech-icon">🐼</div><span>Pandas</span></div>
+          <div class="tech-card" title="React"><div class="tech-icon">⚛️</div><span>React</span></div>
+          <div class="tech-card" title="Node.js"><div class="tech-icon">🟢</div><span>Node.js</span></div>
+          <div class="tech-card" title="SQL"><div class="tech-icon">🗄️</div><span>SQL</span></div>
+          <div class="tech-card" title="Git"><div class="tech-icon">🐙</div><span>Git/GitHub</span></div>
+          <div class="tech-card" title="Azure"><div class="tech-icon">☁️</div><span>Azure</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ PROJECTS ═══ -->
+  <section id="projects" class="section projects-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// 03. Projects</span>
+        <h2 class="section-title">Featured Work</h2>
+        <p class="section-subtitle">Applications and predictive models demonstrating my technical skills.</p>
+      </div>
+
+      <div class="project-filters reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ai">AI / ML</button>
+        <button class="filter-btn" data-filter="web">Web Dev</button>
+      </div>
+
+      <div class="projects-grid">
+
+        <div class="project-card reveal" data-category="web">
+          <div class="project-card-top">
+            <div class="project-icon">🌐</div>
+            <div class="project-links">
+              <a href="https://github.com/maneeshasathsaradev" target="_blank" class="proj-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-tag-row">
+            <span class="proj-tag tag-platform">Full Stack</span>
+            <span class="proj-tag tag-llm">AI Integration</span>
+          </div>
+          <h3 class="project-title">Personal Portfolio Platform</h3>
+          <p class="project-desc">
+            Integrated a custom AI chatbot and transaction history tracking module directly into the portfolio interface, blending modern frontend development with intelligent backend services.
+          </p>
+          <div class="project-tech-row">
+            <span>React.js</span><span>Node.js</span><span>AI API</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="ai">
+          <div class="project-card-top">
+            <div class="project-icon">🗣️</div>
+            <div class="project-links">
+              <a href="https://github.com/maneeshasathsaradev" target="_blank" class="proj-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-tag-row">
+            <span class="proj-tag tag-nlp">NLP</span>
+            <span class="proj-tag tag-llm">Chatbot</span>
+          </div>
+          <h3 class="project-title">Conversational AI FAQ Chatbot</h3>
+          <p class="project-desc">
+            Built a conversational AI Chatbot for frequently asked questions using NLTK and intent-matching algorithms to streamline user interactions and support.
+          </p>
+          <div class="project-tech-row">
+            <span>Python</span><span>NLTK</span><span>Algorithms</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="ai">
+          <div class="project-card-top">
+            <div class="project-icon">💰</div>
+            <div class="project-links">
+              <a href="https://github.com/maneeshasathsaradev" target="_blank" class="proj-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-tag-row">
+            <span class="proj-tag tag-fin">Finance</span>
+            <span class="proj-tag tag-cv">Classification</span>
+          </div>
+          <h3 class="project-title">Credit Scoring & Fraud Detection</h3>
+          <p class="project-desc">
+            Developed a Credit Scoring Model using Random Forest classification to predict financial risk, alongside engineering credit card fraud detection systems using advanced classification techniques.
+          </p>
+          <div class="project-tech-row">
+            <span>Python</span><span>Scikit-learn</span><span>Random Forest</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="web">
+          <div class="project-card-top">
+            <div class="project-icon">🌍</div>
+            <div class="project-links">
+              <a href="https://github.com/maneeshasathsaradev" target="_blank" class="proj-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-tag-row">
+            <span class="proj-tag tag-medical">Cloud</span>
+            <span class="proj-tag tag-platform">APIs</span>
+          </div>
+          <h3 class="project-title">Language Translation Tool</h3>
+          <p class="project-desc">
+            Designed a highly responsive Language Translation Tool utilizing robust cloud APIs and custom UI frameworks to enable seamless multi-lingual communication.
+          </p>
+          <div class="project-tech-row">
+            <span>JavaScript</span><span>Cloud APIs</span><span>UI Frameworks</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="ai">
+          <div class="project-card-top">
+            <div class="project-icon">🏠</div>
+            <div class="project-links">
+              <a href="https://github.com/maneeshasathsaradev" target="_blank" class="proj-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-tag-row">
+            <span class="proj-tag tag-mlops">Regression</span>
+            <span class="proj-tag tag-edge">Analytics</span>
+          </div>
+          <h3 class="project-title">Housing Price Predictor</h3>
+          <p class="project-desc">
+            Developed multivariate Linear Regression models to predict housing prices with high accuracy, analyzing multiple property features and historical data points.
+          </p>
+          <div class="project-tech-row">
+            <span>Python</span><span>Pandas</span><span>Scikit-learn</span>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="ai">
+          <div class="project-card-top">
+            <div class="project-icon">👥</div>
+            <div class="project-links">
+              <a href="https://github.com/maneeshasathsaradev" target="_blank" class="proj-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="project-tag-row">
+            <span class="proj-tag tag-diffusion">Clustering</span>
+            <span class="proj-tag tag-fin">Retail</span>
+          </div>
+          <h3 class="project-title">Retail Customer Segmentation</h3>
+          <p class="project-desc">
+            Implemented K-means clustering algorithms to analyze retail customer purchasing patterns and create actionable segmentation groups for targeted marketing.
+          </p>
+          <div class="project-tech-row">
+            <span>Python</span><span>K-means</span><span>Data Analysis</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="projects-cta reveal">
+        <a href="https://github.com/maneeshasathsaradev" target="_blank" class="btn btn-secondary">
+          <i class="fab fa-github"></i> View All Projects on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ EXPERIENCE ═══ -->
+  <section id="experience" class="section experience-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// 04. Experience</span>
+        <h2 class="section-title">Work Experience</h2>
+        <p class="section-subtitle">Professional growth across software, AI, and operations.</p>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3>Machine Learning Intern</h3>
+                <div class="timeline-company"><i class="fas fa-building"></i> Indolike — Remote</div>
+              </div>
+              <div class="timeline-meta">
+                <span class="timeline-date">May 2025 — Jun 2025</span>
+              </div>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Developed multivariate Linear Regression models to predict housing prices with high accuracy.</li>
+              <li>Implemented K-means clustering algorithms for retail customer segmentation analysis.</li>
+              <li>Engineered credit card fraud detection systems using advanced classification techniques.</li>
+              <li>Maintained a dedicated GitHub repository for transparent code documentation and version control.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span>Machine Learning</span><span>Python</span><span>Regression</span><span>Clustering</span><span>Classification</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3>Artificial Intelligence Intern</h3>
+                <div class="timeline-company"><i class="fas fa-building"></i> CodeAlpha — Remote</div>
+              </div>
+              <div class="timeline-meta">
+                <span class="timeline-date">Apr 2025 — May 2025</span>
+              </div>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Designed a Language Translation Tool utilizing cloud APIs and custom UI frameworks.</li>
+              <li>Built a conversational AI Chatbot for FAQs using NLTK and intent-matching algorithms.</li>
+              <li>Developed a Credit Scoring Model using Random Forest classification to predict financial risk.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span>AI</span><span>NLP</span><span>NLTK</span><span>Random Forest</span><span>Cloud APIs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3>Data Annotation Specialist</h3>
+                <div class="timeline-company"><i class="fas fa-building"></i> Thakral One (Trident) — Colombo</div>
+              </div>
+              <div class="timeline-meta">
+                <span class="timeline-date">2025</span>
+              </div>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Managed dataset labeling for plastic classification to train environmental sustainability ML models.</li>
+              <li>Handled legal documentation and production deadlines for high-volume data processing.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span>Data Annotation</span><span>Data Processing</span><span>Quality Assurance</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3>School Leaver Trainee</h3>
+                <div class="timeline-company"><i class="fas fa-university"></i> Bank of Ceylon — Bentota Branch</div>
+              </div>
+              <div class="timeline-meta">
+                <span class="timeline-date">Feb 2024 — Apr 2024</span>
+              </div>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Gained foundational experience in financial operations, banking hierarchies, and customer service.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span>Operations</span><span>Customer Service</span><span>Finance</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ EDUCATION ═══ -->
+  <section id="education" class="section research-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// 05. Education</span>
+        <h2 class="section-title">Academic Background</h2>
+        <p class="section-subtitle">Pursuing excellence in Statistics, Computer Science, and Information Technology.</p>
+      </div>
+      <div class="research-grid">
+
+        <div class="research-card reveal">
+          <div class="research-card-header">
+            <span class="research-venue venue-q1">BSc Degree</span>
+            <span class="research-year">Apr 2024 – May 2027</span>
+          </div>
+          <h3>Bachelor of Physical Science (Computer Science & Statistics)</h3>
+          <p class="research-authors">University of Kelaniya</p>
+          <p class="research-abstract">
+            Focusing on Computational Statistics, Algorithmic Foundations, and Data Structures to build a strong theoretical and practical foundation for complex data-driven software engineering.
+          </p>
+          <div class="research-metrics" style="margin-top: 15px;">
+            <span><i class="fas fa-graduation-cap"></i> Undergraduate</span>
+          </div>
+        </div>
+
+        <div class="research-card reveal">
+          <div class="research-card-header">
+            <span class="research-venue venue-conf">BIT Degree</span>
+            <span class="research-year">Oct 2024 – Sep 2027</span>
+          </div>
+          <h3>Bachelor of Information Technology (BIT)</h3>
+          <p class="research-authors">University of Colombo School of Computing (UCSC)</p>
+          <p class="research-abstract">
+            Focusing on Software Engineering, Database Management, and Enterprise Application Development, bridging the gap between hardware architectures and high-level programming.
+          </p>
+          <div class="research-metrics" style="margin-top: 15px;">
+            <span><i class="fas fa-graduation-cap"></i> Undergraduate</span>
+          </div>
+        </div>
+        
+        <div class="research-card reveal" style="grid-column: 1 / -1;">
+           <div class="research-card-header">
+            <span class="research-venue venue-q2">Leadership</span>
+            <span class="research-year">2024 – Present</span>
+          </div>
+          <h3>Extracurriculars & Leadership</h3>
+          <p class="research-abstract">
+            • <strong>Fundraising Coordinator</strong>, Leo Club, University of Kelaniya (Since Aug 2024).<br/>
+            • <strong>Executive Member</strong>, Statistics and Computer Science Students’ Association (SCSSA).
+          </p>
+        </div>
+
+        <div class="research-card reveal" style="grid-column: 1 / -1;">
+           <div class="research-card-header">
+            <span class="research-venue venue-q1">Ongoing AI Research</span>
+            <span class="research-year">Aug 2026 – Present</span>
+          </div>
+          <h3>Artificial Intelligence Research Project</h3>
+          <p class="research-abstract">
+            Conducting comprehensive research in Artificial Intelligence, focusing on advanced Data Structures, Algorithmic Foundations, and emerging AI methodologies.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ CERTIFICATIONS ═══ -->
+  <section id="certifications" class="section certs-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// 06. Certifications</span>
+        <h2 class="section-title">Certifications</h2>
+        <p class="section-subtitle">Validated expertise across modern development and AI platforms</p>
+      </div>
+      <div class="certs-grid">
+
+        <div class="cert-card reveal">
+          <div class="cert-logo deeplearning"><span>DP</span></div>
+          <div class="cert-info">
+            <h3>Full Stack Development</h3>
+            <p>DP Education</p>
+            <span class="cert-date">Issued: 2026</span>
+          </div>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-logo azure"><i class="fab fa-windows"></i></div>
+          <div class="cert-info">
+            <h3>Fundamental AI Concepts</h3>
+            <p>Microsoft</p>
+            <span class="cert-date">Issued: 2024</span>
+          </div>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-logo gcp"><i class="fab fa-linkedin-in"></i></div>
+          <div class="cert-info">
+            <h3>Career Essentials in Generative AI</h3>
+            <p>Microsoft & LinkedIn Learning</p>
+            <span class="cert-date">Issued: 2024</span>
+          </div>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-logo azure"><i class="fab fa-windows"></i></div>
+          <div class="cert-info">
+            <h3>Introduction to Software Development</h3>
+            <p>Microsoft</p>
+            <span class="cert-date">Issued: 2024</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ CONTACT ═══ -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// 07. Contact</span>
+        <h2 class="section-title">Let's Build Together</h2>
+        <p class="section-subtitle">Ready to bring AI-powered software solutions to your organization</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="contact-tagline">
+            <h3>Open to exciting <span class="text-gradient">Engineering</span> opportunities</h3>
+            <p>Whether you're looking for a Full Stack Developer, an AI Engineer, or a technical collaborator — I'd love to talk.</p>
+          </div>
+          <div class="contact-channels">
+            <a href="mailto:maneeshasathsaram@gmail.com" class="contact-channel">
+              <div class="channel-icon"><i class="fas fa-envelope"></i></div>
+              <div class="channel-info">
+                <strong>Email</strong>
+                <span>maneeshasathsaram@gmail.com</span>
+              </div>
+              <i class="fas fa-arrow-right channel-arrow"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/maneesha-sathsara-02467938b" target="_blank" class="contact-channel">
+              <div class="channel-icon linkedin"><i class="fab fa-linkedin"></i></div>
+              <div class="channel-info">
+                <strong>LinkedIn</strong>
+                <span>Maneesha Sathsara</span>
+              </div>
+              <i class="fas fa-arrow-right channel-arrow"></i>
+            </a>
+            <a href="https://github.com/maneesha-sathsara" target="_blank" class="contact-channel">
+              <div class="channel-icon github"><i class="fab fa-github"></i></div>
+              <div class="channel-info">
+                <strong>GitHub</strong>
+                <span>maneesha-sathsara</span>
+              </div>
+              <i class="fas fa-arrow-right channel-arrow"></i>
+            </a>
+            <a href="https://x.com/maneeshasathsar" target="_blank" class="contact-channel">
+              <div class="channel-icon"><span><i class="fa-brands fa-x-twitter"></i></span></div>
+              <div class="channel-info">
+                <strong>X (Twitter)</strong>
+                <span>@maneeshasathsar</span>
+              </div>
+              <i class="fas fa-arrow-right channel-arrow"></i>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form-wrapper reveal reveal-delay">
+          <form class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label for="contactName">Your Name</label>
+              <input type="text" id="contactName" name="name" placeholder="John Smith" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email Address</label>
+              <input type="email" id="contactEmail" name="email" placeholder="john@company.com" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="contactSubject">Subject</label>
+              <select id="contactSubject" name="subject">
+                <option value="">Select a topic...</option>
+                <option>Job Opportunity</option>
+                <option>Project Collaboration</option>
+                <option>Consulting / Freelance</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactMsg">Message</label>
+              <textarea id="contactMsg" name="message" rows="5" placeholder="Tell me about the opportunity or project..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+            <div class="form-success" id="formSuccess">
+              <i class="fas fa-check-circle"></i> Message sent! I'll get back to you soon.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="#home" class="nav-logo ai-animated-logo">
+          <i class="fas fa-brain logo-icon"></i>
+          <span class="logo-text">MS DEV</span>
+        </a>
+        <p>Leveraging statistics and software engineering.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://github.com/maneeshasathsaradev" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/maneesha-sathsara-02467938b" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/maneeshasmdev" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Maneesha Sathsara. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+  <!-- ═══════════════════════════════════════════════ AI CHATBOT ═══ -->
+  <div class="chatbot-container" id="chatbotContainer">
+    <!-- Chat Window -->
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">
+            <i class="fas fa-brain"></i>
+            <span class="status-indicator"></span>
+          </div>
+          <div class="chat-title-group">
+            <h4>MS AI Assistant</h4>
+            <p>Online | CV AI Model</p>
+          </div>
+        </div>
+        <button class="chat-close" id="chatCloseBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="chat-message bot">
+          <div class="msg-content">Hello! I'm Maneesha's AI Assistant. I'm trained on his CV, projects, and skills. How can I help you today?</div>
+          <span class="msg-time">Just now</span>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <form id="chatForm">
+          <input type="text" id="chatInput" placeholder="Ask about Maneesha..." autocomplete="off" required />
+          <button type="submit" id="chatSubmit" aria-label="Send"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Floating Button -->
+    <button class="chat-toggle" id="chatToggleBtn" aria-label="Open AI Chat">
+      <i class="fas fa-comment-dots"></i>
+    </button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
