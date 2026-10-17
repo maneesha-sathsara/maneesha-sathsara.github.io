@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chatCloseBtn.addEventListener('click', () => chatWindow.classList.remove('active'));
   }
 
-  const GEMINI_API_KEY = "YOUR GEMINI API KEY HERE"; // Replace with your
+  const GEMINI_API_KEY = "YOUR_API_KEY_HERE";
   
   const systemPrompt = `You are an AI assistant for Maneesha Sathsara's portfolio website. Answer questions based on his CV and portfolio data. If asked a general knowledge question, answer it. If asked a highly personal question about Maneesha that is not in the context, reply EXACTLY with: "I'm sorry, database eke answer eka denna amaruyi, e nisa eyawa contact karagena wisthara danaganna."
 
