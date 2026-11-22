@@ -21,7 +21,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;overflow-x:hidden}
 .wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:32px 24px 36px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
-.logo{width:42px;height:42px;border-radius:12px;background:var(--ink);display:grid;place-items:center;color:var(--bg);font-weight:800}
+.logo{display:block;width:clamp(104px,12vw,144px);height:auto;margin-bottom:14px}
 main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
 .rise{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -50,9 +50,9 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 </head>
 <body>
 <div class="wrap">
-  <div class="logo" aria-label="Maneesha Sathsara">MS</div>
 
   <main>
+    <img class="logo" src="ms-logo.gif" alt="Maneesha Sathsara logo" width="144" height="90">
     <div class="chip rise"><i class="dot" aria-hidden="true"></i>Under maintenance</div>
     <h1 class="rise">My new portfolio <span>is coming soon.</span></h1>
     <div class="clock rise" style="animation-delay:.15s" role="timer" aria-label="Time until launch">
