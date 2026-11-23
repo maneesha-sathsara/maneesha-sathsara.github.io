@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070a12; --ink:#f2f5fb; --muted:rgba(242,245,251,.62); --line:rgba(242,245,251,.14);
+  --bg:#070a12; --ink:#f2f5fb; --muted:rgba(242,245,251,.65); --line:rgba(242,245,251,.15);
   --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
   --body:"DM Sans","Segoe UI",system-ui,sans-serif;
 }
@@ -27,19 +27,19 @@ html,body{background:var(--bg);color:var(--ink);font-family:var(--body);line-hei
 /* Natural Winter Night Sky Atmosphere */
 body{
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34, 58, 102, .34) 0%, transparent 70%),
-    radial-gradient(ellipse 95% 28% at 50% 102%, rgba(190, 215, 255, .07) 0%, transparent 75%),
+    radial-gradient(ellipse 85% 50% at 50% -10%, rgba(36, 62, 110, .36) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 35% at 50% 100%, rgba(180, 210, 255, .12) 0%, transparent 75%),
     #070a12;
 }
 
-/* Fullscreen Canvas for Multi-Depth Snowfall */
-#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+/* Fullscreen Canvas for Blowing Snow, Wind Mist & Ground Spindrift */
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
 
 /* Steady Lit Christmas Fairy Lights Along Top (No Blinking) */
 .lights{
   position:fixed;top:-3px;left:0;width:100%;
   display:flex;justify-content:space-around;
-  pointer-events:none;z-index:2;padding:0 10px;
+  pointer-events:none;z-index:4;padding:0 10px;
   border-top:1px solid rgba(242,245,251,.16);
 }
 .bulb{
@@ -56,9 +56,39 @@ body{
 .bulb:nth-child(4n+3){background:#06d6a0;box-shadow:0 0 14px 3px rgba(6,214,160,.6)}
 .bulb:nth-child(4n+4){background:#72efdd;box-shadow:0 0 14px 3px rgba(114,239,221,.6)}
 
-/* Realistic Snow-Dusted Pine Trees at Bottom Corners */
-.tree-left{position:fixed;bottom:-4px;left:1vw;width:clamp(155px, 21vw, 270px);pointer-events:none;z-index:2;filter:drop-shadow(0 12px 26px rgba(0,0,0,.8))}
-.tree-right{position:fixed;bottom:-4px;right:1.5vw;width:clamp(110px, 14vw, 185px);pointer-events:none;z-index:2;filter:drop-shadow(0 12px 26px rgba(0,0,0,.8))}
+/* Snow-Covered Ground Layers (Back & Front Drifts) */
+.snow-ground-back{
+  position:fixed;bottom:0;left:0;width:100%;height:clamp(54px, 8vh, 88px);
+  pointer-events:none;z-index:1;
+}
+.snow-ground-front{
+  position:fixed;bottom:0;left:0;width:100%;height:clamp(36px, 5.5vh, 62px);
+  pointer-events:none;z-index:3;
+  filter:drop-shadow(0 -4px 14px rgba(148, 197, 255, .14));
+}
+
+/* Realistic Snow-Dusted Pine Trees Planted in the Snow (Swaying in Wind) */
+.tree-left{
+  position:fixed;bottom:clamp(14px, 2.5vh, 26px);left:1vw;
+  width:clamp(155px, 21vw, 275px);
+  pointer-events:none;z-index:2;
+  transform-origin:50% 95%;
+  will-change:transform;
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.75));
+}
+.tree-right{
+  position:fixed;bottom:clamp(16px, 2.8vh, 30px);right:1.5vw;
+  width:clamp(112px, 14.5vw, 190px);
+  pointer-events:none;z-index:2;
+  transform-origin:50% 95%;
+  will-change:transform;
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.75));
+}
+.tree-upper{
+  transform-box:fill-box;
+  transform-origin:50% 100%;
+  will-change:transform;
+}
 
 /* ONLY the Christmas Tree Star twinkles/blinks */
 .tree-star{
@@ -74,7 +104,7 @@ body{
 }
 
 /* No z-index on .wrap so mix-blend-mode:screen blends directly with body & erases the black box */
-.wrap{position:relative;max-width:900px;margin:0 auto;padding:48px 24px 32px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
+.wrap{position:relative;max-width:900px;margin:0 auto;padding:48px 24px 36px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
 
 /* Logo with Black Box Removed + Natural Felt Santa Hat on 'M' */
 .logo-wrap{position:relative;display:inline-block;margin-bottom:14px}
@@ -85,11 +115,12 @@ body{
 }
 .santa-hat{
   position:absolute;top:-4%;left:10%;width:24%;height:auto;
+  transform-origin:bottom center;
   transform:rotate(-16deg);pointer-events:none;
   filter:drop-shadow(0 3px 5px rgba(0,0,0,.75));
 }
 
-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
+main{position:relative;z-index:5;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
 .rise{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
 .chip{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(12,17,30,.55);backdrop-filter:blur(8px);margin-bottom:24px}
@@ -102,15 +133,15 @@ h1 span{display:block;color:var(--muted)}
 .clock{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;width:100%;max-width:560px}
 .unit{
   position:relative;padding:20px 8px 14px;border-radius:18px;
-  background:rgba(15, 22, 38, .55);
-  border:1px solid rgba(242,245,251,.15);
+  background:rgba(15, 22, 38, .58);
+  border:1px solid rgba(242,245,251,.16);
   backdrop-filter:blur(10px);
   box-shadow:0 12px 32px rgba(0,0,0,.35);
 }
 .unit::before{
   content:"";position:absolute;top:-2px;left:10%;right:10%;height:4px;
   border-radius:999px;
-  background:linear-gradient(90deg, transparent, rgba(235,244,255,.85) 25%, rgba(255,255,255,.95) 50%, rgba(235,244,255,.85) 75%, transparent);
+  background:linear-gradient(90deg, transparent, rgba(235,244,255,.88) 25%, rgba(255,255,255,.98) 50%, rgba(235,244,255,.88) 75%, transparent);
   filter:blur(.4px);
 }
 .unit b{display:block;font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
@@ -122,7 +153,17 @@ h1 span{display:block;color:var(--muted)}
 .btn{display:inline-block;padding:13px 26px;border-radius:12px;font-weight:500;color:var(--bg);text-decoration:none;background:var(--ink)}
 body.launched .clock,body.launched .when,body.launched .chip,body.launched h1{display:none}
 body.launched .live{display:block}
-footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;color:var(--muted);font-size:.95rem;padding-top:14px}
+
+/* Footer clearly legible above the snow ground */
+footer{
+  position:relative;z-index:5;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;
+  color:var(--muted);font-size:.92rem;
+  padding:8px 18px;border-radius:999px;
+  background:rgba(7, 10, 18, .62);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(242, 245, 251, .1);
+}
 footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .2s}
 footer a:hover{border-color:var(--ink)}
 a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
@@ -131,14 +172,15 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   .clock{gap:8px}
   .unit{padding:14px 4px 10px}
   .bulb:nth-child(even){display:none}
-  .tree-left{width:118px;left:-8px;opacity:.92}
-  .tree-right{width:88px;right:-8px;opacity:.88}
+  .tree-left{width:118px;left:-10px}
+  .tree-right{width:88px;right:-10px}
+  footer{gap:8px 16px;font-size:.85rem;padding:7px 14px}
 }
 </style>
 </head>
 <body>
 
-<!-- Canvas for Multi-Depth Natural Snowfall -->
+<!-- Canvas for Wind-Blown Snowfall, Mist & Spindrift -->
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <!-- Steady Glowing Christmas Bulbs Along Top (No Blinking) -->
@@ -149,8 +191,21 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
 </div>
 
-<!-- Realistic Snow-Dusted Pine Christmas Tree + Wrapped Gifts (Bottom-Left) -->
-<svg class="tree-left" viewBox="0 0 280 340" fill="none" aria-hidden="true">
+<!-- Background Snow Drift Layer (Behind Trees) -->
+<svg class="snow-ground-back" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="snowHillBack" x1="720" y1="0" x2="720" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#334b75" stop-opacity=".75"/>
+      <stop offset="45%" stop-color="#18253d" stop-opacity=".92"/>
+      <stop offset="100%" stop-color="#0b1120" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <path d="M0 32 Q 220 4, 460 36 T 980 28 T 1440 18 L 1440 100 L 0 100 Z" fill="url(#snowHillBack)"/>
+  <path d="M0 32 Q 220 4, 460 36 T 980 28 T 1440 18" stroke="rgba(226, 239, 255, .35)" stroke-width="1.5" fill="none"/>
+</svg>
+
+<!-- Realistic Snow-Dusted Pine Christmas Tree + Wrapped Gifts (Bottom-Left, Swaying in Wind) -->
+<svg id="treeLeft" class="tree-left" viewBox="0 0 280 340" fill="none" aria-hidden="true">
   <defs>
     <linearGradient id="pineDark" x1="140" y1="30" x2="140" y2="300" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#1b4d3e"/>
@@ -170,39 +225,20 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       <stop offset="50%" stop-color="#f59e0b" stop-opacity=".42"/>
       <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="snowGround">
-      <stop offset="0%" stop-color="#dbeafe" stop-opacity=".26"/>
-      <stop offset="70%" stop-color="#93c5fd" stop-opacity=".08"/>
-      <stop offset="100%" stop-color="#070a12" stop-opacity="0"/>
-    </radialGradient>
   </defs>
 
-  <ellipse cx="140" cy="328" rx="135" ry="16" fill="url(#snowGround)"/>
-  <rect x="128" y="282" width="24" height="42" rx="3" fill="#2b1d14"/>
+  <!-- Tree Trunk -->
+  <rect x="128" y="282" width="24" height="46" rx="3" fill="#2b1d14"/>
 
+  <!-- Lower Boughs -->
   <path d="M140 195 L32 292 Q75 286 105 294 Q140 284 175 294 Q205 286 248 292 Z" fill="url(#pineDark)"/>
-  <path d="M32 292 Q52 282 70 289 Q50 288 32 292 Z M248 292 Q228 282 210 289 Q230 288 248 292 Z" fill="#e2e8f0" opacity=".75"/>
+  <path d="M32 292 Q52 282 70 289 Q50 288 32 292 Z M248 292 Q228 282 210 289 Q230 288 248 292 Z" fill="#e2e8f0" opacity=".78"/>
 
   <path d="M140 150 L46 244 Q85 238 112 246 Q140 236 168 246 Q195 238 234 244 Z" fill="url(#pineMid)"/>
-  <path d="M46 244 Q66 234 86 241 Q64 241 46 244 Z M234 244 Q214 234 194 241 Q216 241 234 244 Z" fill="#e2e8f0" opacity=".8"/>
+  <path d="M46 244 Q66 234 86 241 Q64 241 46 244 Z M234 244 Q214 234 194 241 Q216 241 234 244 Z" fill="#e2e8f0" opacity=".82"/>
 
-  <path d="M140 110 L62 196 Q96 190 118 198 Q140 189 162 198 Q184 190 218 196 Z" fill="url(#pineDark)"/>
-  <path d="M62 196 Q82 187 98 193 Q78 193 62 196 Z M218 196 Q198 187 182 193 Q202 193 218 196 Z" fill="#f1f5f9" opacity=".82"/>
+  <path d="M72 192 Q140 220 208 196 M52 242 Q140 274 226 244" stroke="rgba(255,214,102,.28)" stroke-width="1.2" fill="none"/>
 
-  <path d="M140 72 L80 148 Q106 143 124 150 Q140 142 156 150 Q174 143 200 148 Z" fill="url(#pineMid)"/>
-  <path d="M80 148 Q98 140 112 146 Q94 146 80 148 Z M200 148 Q182 140 168 146 Q186 146 200 148 Z" fill="#f1f5f9" opacity=".85"/>
-
-  <path d="M140 36 L100 102 Q120 98 140 104 Q160 98 180 102 Z" fill="url(#pineDark)"/>
-  <path d="M140 36 L124 62 Q134 59 140 63 Q146 59 156 62 Z" fill="#f8fafc" opacity=".9"/>
-
-  <path d="M114 96 Q145 112 174 102 M92 142 Q142 166 192 148 M72 192 Q140 220 208 196 M52 242 Q140 274 226 244" stroke="rgba(255,214,102,.28)" stroke-width="1.2" fill="none"/>
-
-  <!-- Steady Warm Fairy Lights on Left Tree -->
-  <circle cx="122" cy="100" r="6" fill="url(#steadyWarm)"/><circle cx="122" cy="100" r="1.7" fill="#fff8d6"/>
-  <circle cx="158" cy="105" r="6" fill="url(#steadyWarm)"/><circle cx="158" cy="105" r="1.7" fill="#fff8d6"/>
-  <circle cx="105" cy="148" r="7" fill="url(#steadyWarm)"/><circle cx="105" cy="148" r="1.9" fill="#fff8d6"/>
-  <circle cx="145" cy="156" r="7" fill="url(#steadyWarm)"/><circle cx="145" cy="156" r="1.9" fill="#fff8d6"/>
-  <circle cx="180" cy="150" r="7" fill="url(#steadyWarm)"/><circle cx="180" cy="150" r="1.9" fill="#fff8d6"/>
   <circle cx="88" cy="198" r="7" fill="url(#steadyWarm)"/><circle cx="88" cy="198" r="1.9" fill="#fff8d6"/>
   <circle cx="132" cy="208" r="7" fill="url(#steadyWarm)"/><circle cx="132" cy="208" r="1.9" fill="#fff8d6"/>
   <circle cx="176" cy="204" r="7" fill="url(#steadyWarm)"/><circle cx="176" cy="204" r="1.9" fill="#fff8d6"/>
@@ -211,65 +247,102 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   <circle cx="164" cy="258" r="8" fill="url(#steadyWarm)"/><circle cx="164" cy="258" r="2.1" fill="#fff8d6"/>
   <circle cx="208" cy="248" r="8" fill="url(#steadyWarm)"/><circle cx="208" cy="248" r="2.1" fill="#fff8d6"/>
 
-  <!-- Glossy Christmas Ornaments -->
-  <circle cx="134" cy="126" r="5.5" fill="#b91c1c"/><circle cx="132.2" cy="124.2" r="1.5" fill="rgba(255,255,255,.55)"/>
-  <circle cx="162" cy="176" r="6" fill="#d97706"/><circle cx="160" cy="174" r="1.6" fill="rgba(255,255,255,.55)"/>
-  <circle cx="106" cy="182" r="5.5" fill="#dc2626"/><circle cx="104.2" cy="180.2" r="1.5" fill="rgba(255,255,255,.55)"/>
   <circle cx="148" cy="232" r="6.5" fill="#b91c1c"/><circle cx="146" cy="230" r="1.8" fill="rgba(255,255,255,.55)"/>
   <circle cx="94" cy="236" r="6" fill="#eab308"/><circle cx="92" cy="234" r="1.6" fill="rgba(255,255,255,.55)"/>
   <circle cx="192" cy="234" r="6" fill="#dc2626"/><circle cx="190" cy="232" r="1.6" fill="rgba(255,255,255,.55)"/>
 
-  <!-- ONLY THIS STAR BLINKS / TWINKLES -->
-  <g class="tree-star">
-    <circle cx="140" cy="28" r="28" fill="url(#starHalo)"/>
-    <path d="M140 11 L144.2 22.5 L156.5 22.5 L146.5 29.8 L150.2 41.5 L140 34.2 L129.8 41.5 L133.5 29.8 L123.5 22.5 L135.8 22.5 Z" fill="#fef08a"/>
-    <circle cx="140" cy="27" r="3.5" fill="#ffffff"/>
+  <!-- Upper Boughs + Star (Bends more flexibly in the wind) -->
+  <g id="treeLeftTop" class="tree-upper">
+    <path d="M140 110 L62 196 Q96 190 118 198 Q140 189 162 198 Q184 190 218 196 Z" fill="url(#pineDark)"/>
+    <path d="M62 196 Q82 187 98 193 Q78 193 62 196 Z M218 196 Q198 187 182 193 Q202 193 218 196 Z" fill="#f1f5f9" opacity=".84"/>
+
+    <path d="M140 72 L80 148 Q106 143 124 150 Q140 142 156 150 Q174 143 200 148 Z" fill="url(#pineMid)"/>
+    <path d="M80 148 Q98 140 112 146 Q94 146 80 148 Z M200 148 Q182 140 168 146 Q186 146 200 148 Z" fill="#f1f5f9" opacity=".88"/>
+
+    <path d="M140 36 L100 102 Q120 98 140 104 Q160 98 180 102 Z" fill="url(#pineDark)"/>
+    <path d="M140 36 L124 62 Q134 59 140 63 Q146 59 156 62 Z" fill="#f8fafc" opacity=".92"/>
+
+    <path d="M114 96 Q145 112 174 102 M92 142 Q142 166 192 148" stroke="rgba(255,214,102,.28)" stroke-width="1.2" fill="none"/>
+
+    <circle cx="122" cy="100" r="6" fill="url(#steadyWarm)"/><circle cx="122" cy="100" r="1.7" fill="#fff8d6"/>
+    <circle cx="158" cy="105" r="6" fill="url(#steadyWarm)"/><circle cx="158" cy="105" r="1.7" fill="#fff8d6"/>
+    <circle cx="105" cy="148" r="7" fill="url(#steadyWarm)"/><circle cx="105" cy="148" r="1.9" fill="#fff8d6"/>
+    <circle cx="145" cy="156" r="7" fill="url(#steadyWarm)"/><circle cx="145" cy="156" r="1.9" fill="#fff8d6"/>
+    <circle cx="180" cy="150" r="7" fill="url(#steadyWarm)"/><circle cx="180" cy="150" r="1.9" fill="#fff8d6"/>
+
+    <circle cx="134" cy="126" r="5.5" fill="#b91c1c"/><circle cx="132.2" cy="124.2" r="1.5" fill="rgba(255,255,255,.55)"/>
+    <circle cx="162" cy="176" r="6" fill="#d97706"/><circle cx="160" cy="174" r="1.6" fill="rgba(255,255,255,.55)"/>
+    <circle cx="106" cy="182" r="5.5" fill="#dc2626"/><circle cx="104.2" cy="180.2" r="1.5" fill="rgba(255,255,255,.55)"/>
+
+    <!-- ONLY THIS STAR BLINKS / TWINKLES -->
+    <g class="tree-star">
+      <circle cx="140" cy="28" r="28" fill="url(#starHalo)"/>
+      <path d="M140 11 L144.2 22.5 L156.5 22.5 L146.5 29.8 L150.2 41.5 L140 34.2 L129.8 41.5 L133.5 29.8 L123.5 22.5 L135.8 22.5 Z" fill="#fef08a"/>
+      <circle cx="140" cy="27" r="3.5" fill="#ffffff"/>
+    </g>
   </g>
 
-  <!-- Wrapped Presents -->
-  <rect x="66" y="294" width="38" height="32" rx="3" fill="#991b1b"/>
+  <!-- Wrapped Presents Nestled in Snow -->
+  <rect x="66" y="294" width="38" height="34" rx="3" fill="#991b1b"/>
   <rect x="64" y="290" width="42" height="6" rx="1.5" fill="#b91c1c"/>
-  <rect x="82" y="290" width="6" height="36" fill="#fbbf24"/>
+  <rect x="82" y="290" width="6" height="38" fill="#fbbf24"/>
   <path d="M85 290 C78 282, 72 286, 81 290 M85 290 C92 282, 98 286, 89 290" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
 
-  <rect x="172" y="298" width="34" height="28" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <rect x="172" y="298" width="34" height="30" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1"/>
   <rect x="170" y="294" width="38" height="5" rx="1.5" fill="#334155"/>
-  <rect x="186" y="294" width="5" height="32" fill="#e11d48"/>
+  <rect x="186" y="294" width="5" height="34" fill="#e11d48"/>
   <path d="M188.5 294 C182 287, 177 290, 185 294 M188.5 294 C195 287, 200 290, 192 294" stroke="#e11d48" stroke-width="1.8" stroke-linecap="round"/>
 
-  <rect x="108" y="304" width="26" height="22" rx="2.5" fill="#065f46"/>
-  <rect x="119" y="304" width="4" height="22" fill="#fde68a"/>
+  <rect x="108" y="304" width="26" height="24" rx="2.5" fill="#065f46"/>
+  <rect x="119" y="304" width="4" height="24" fill="#fde68a"/>
 </svg>
 
-<!-- Companion Snow-Dusted Pine Tree (Bottom-Right) -->
-<svg class="tree-right" viewBox="0 0 200 260" fill="none" aria-hidden="true">
-  <ellipse cx="100" cy="250" rx="92" ry="12" fill="url(#snowGround)"/>
-  <rect x="91" y="214" width="18" height="34" rx="2" fill="#2b1d14"/>
-  <path d="M100 142 L24 222 Q65 216 100 224 Q135 216 176 222 Z" fill="url(#pineDark)"/>
-  <path d="M24 222 Q42 214 58 219 Q40 219 24 222 Z M176 222 Q158 214 142 219 Q160 219 176 222 Z" fill="#e2e8f0" opacity=".78"/>
-  <path d="M100 96 L38 172 Q70 167 100 174 Q130 167 162 172 Z" fill="url(#pineMid)"/>
-  <path d="M38 172 Q54 164 68 169 Q52 169 38 172 Z M162 172 Q146 164 132 169 Q148 169 162 172 Z" fill="#f1f5f9" opacity=".82"/>
-  <path d="M100 50 L54 122 Q78 118 100 124 Q122 118 146 122 Z" fill="url(#pineDark)"/>
-  <path d="M100 50 L86 72 Q95 70 100 73 Q105 70 114 72 Z" fill="#f8fafc" opacity=".88"/>
+<!-- Companion Snow-Dusted Pine Tree (Bottom-Right, Swaying in Wind) -->
+<svg id="treeRight" class="tree-right" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+  <rect x="91" y="214" width="18" height="38" rx="2" fill="#2b1d14"/>
 
-  <!-- Steady Warm Fairy Lights on Right Tree -->
-  <circle cx="84" cy="112" r="6" fill="url(#steadyWarm)"/><circle cx="84" cy="112" r="1.7" fill="#fff8d6"/>
-  <circle cx="116" cy="154" r="6" fill="url(#steadyWarm)"/><circle cx="116" cy="154" r="1.7" fill="#fff8d6"/>
+  <path d="M100 142 L24 222 Q65 216 100 224 Q135 216 176 222 Z" fill="url(#pineDark)"/>
+  <path d="M24 222 Q42 214 58 219 Q40 219 24 222 Z M176 222 Q158 214 142 219 Q160 219 176 222 Z" fill="#e2e8f0" opacity=".8"/>
   <circle cx="74" cy="198" r="6" fill="url(#steadyWarm)"/><circle cx="74" cy="198" r="1.7" fill="#fff8d6"/>
   <circle cx="128" cy="202" r="6" fill="url(#steadyWarm)"/><circle cx="128" cy="202" r="1.7" fill="#fff8d6"/>
 
-  <!-- ONLY THIS STAR BLINKS / TWINKLES -->
-  <g class="tree-star" style="animation-delay:-.9s">
-    <circle cx="100" cy="43" r="20" fill="url(#starHalo)"/>
-    <path d="M100 31 L103 39.5 L112 39.5 L104.8 44.8 L107.5 53.5 L100 48.2 L92.5 53.5 L95.2 44.8 L88 39.5 L97 39.5 Z" fill="#fef08a"/>
-    <circle cx="100" cy="42.5" r="2.5" fill="#ffffff"/>
+  <g id="treeRightTop" class="tree-upper">
+    <path d="M100 96 L38 172 Q70 167 100 174 Q130 167 162 172 Z" fill="url(#pineMid)"/>
+    <path d="M38 172 Q54 164 68 169 Q52 169 38 172 Z M162 172 Q146 164 132 169 Q148 169 162 172 Z" fill="#f1f5f9" opacity=".84"/>
+
+    <path d="M100 50 L54 122 Q78 118 100 124 Q122 118 146 122 Z" fill="url(#pineDark)"/>
+    <path d="M100 50 L86 72 Q95 70 100 73 Q105 70 114 72 Z" fill="#f8fafc" opacity=".9"/>
+
+    <circle cx="84" cy="112" r="6" fill="url(#steadyWarm)"/><circle cx="84" cy="112" r="1.7" fill="#fff8d6"/>
+    <circle cx="116" cy="154" r="6" fill="url(#steadyWarm)"/><circle cx="116" cy="154" r="1.7" fill="#fff8d6"/>
+
+    <!-- ONLY THIS STAR BLINKS / TWINKLES -->
+    <g class="tree-star" style="animation-delay:-.9s">
+      <circle cx="100" cy="43" r="20" fill="url(#starHalo)"/>
+      <path d="M100 31 L103 39.5 L112 39.5 L104.8 44.8 L107.5 53.5 L100 48.2 L92.5 53.5 L95.2 44.8 L88 39.5 L97 39.5 Z" fill="#fef08a"/>
+      <circle cx="100" cy="42.5" r="2.5" fill="#ffffff"/>
+    </g>
   </g>
+</svg>
+
+<!-- Foreground Snowbank Layer (Covers Base of Trees & Gifts so They Sit Naturally in Snow) -->
+<svg class="snow-ground-front" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="snowHillFront" x1="720" y1="0" x2="720" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#dbeafe" stop-opacity=".95"/>
+      <stop offset="22%" stop-color="#93b4db" stop-opacity=".88"/>
+      <stop offset="65%" stop-color="#223456" stop-opacity=".96"/>
+      <stop offset="100%" stop-color="#0b1221" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <path d="M0 16 Q 160 34, 380 22 T 860 28 T 1240 16 Q 1350 10, 1440 20 L 1440 80 L 0 80 Z" fill="url(#snowHillFront)"/>
+  <path d="M0 16 Q 160 34, 380 22 T 860 28 T 1240 16 Q 1350 10, 1440 20" stroke="#ffffff" stroke-width="1.8" opacity=".75" fill="none"/>
 </svg>
 
 <div class="wrap">
   <main>
     <div class="logo-wrap">
-      <svg class="santa-hat" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <svg id="santaHat" class="santa-hat" viewBox="0 0 64 64" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="hatRed" x1="14" y1="14" x2="46" y2="44" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#dc2626"/>
@@ -305,7 +378,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <a href="Maneesha_Sathsara_CV.pdf">Download CV</a>
   </footer>
 </div>
-<noscript><p style="position:relative;text-align:center;padding:0 24px 24px;color:#8e9ab8">This page counts down to 1 January 2027, 12:00 am Sri Lanka time. Please enable JavaScript to see the timer.</p></noscript>
+<noscript><p style="position:relative;z-index:5;text-align:center;padding:0 24px 24px;color:#8e9ab8">This page counts down to 1 January 2027, 12:00 am Sri Lanka time. Please enable JavaScript to see the timer.</p></noscript>
 
 <script>
 (function(){
@@ -332,10 +405,17 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   }
   tick(); setInterval(tick, 1000);
 
-  /* High-DPI Multi-Layer Natural Snowfall */
+  /* High-DPI Wind-Blown Snowfall + Synchronized Swaying Christmas Trees */
   var canvas = $('fx');
   var ctx = canvas.getContext('2d');
+  var treeLeft = $('treeLeft');
+  var treeRight = $('treeRight');
+  var treeLeftTop = $('treeLeftTop');
+  var treeRightTop = $('treeRightTop');
+  var santaHat = $('santaHat');
+
   var flakes = [];
+  var windStreaks = [];
   var w, h, dpr;
 
   function resize(){
@@ -349,25 +429,100 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   window.addEventListener('resize', resize);
   resize();
 
-  var totalFlakes = Math.min(125, Math.max(55, Math.floor(w / 9)));
+  /* Multi-depth snowflakes + low-lying blowing snow spindrift */
+  var totalFlakes = Math.min(145, Math.max(65, Math.floor(w / 8)));
   for(var i = 0; i < totalFlakes; i++){
     var depth = Math.random();
     flakes.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      r: 0.9 + depth * 2.6,
-      speedY: 0.35 + depth * 1.15,
-      windAmp: 0.25 + depth * 0.65,
+      r: 0.9 + depth * 2.5,
+      speedY: 0.45 + depth * 1.25,
+      windFactor: 0.55 + depth * 0.95,
       phase: Math.random() * Math.PI * 2,
-      freq: 0.009 + Math.random() * 0.014,
-      alpha: 0.22 + depth * 0.58,
-      bokeh: depth > 0.78
+      freq: 0.012 + Math.random() * 0.016,
+      alpha: 0.25 + depth * 0.6,
+      bokeh: depth > 0.8
     });
   }
 
-  function animate(){
+  /* Subtle atmospheric wind mist streaks */
+  var streakCount = Math.min(14, Math.max(6, Math.floor(w / 110)));
+  for(var j = 0; j < streakCount; j++){
+    windStreaks.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      len: 45 + Math.random() * 95,
+      speed: 3.5 + Math.random() * 4.5,
+      alpha: 0.03 + Math.random() * 0.05
+    });
+  }
+
+  var lastTime = performance.now();
+
+  function animate(now){
+    var dt = Math.min(0.05, (now - lastTime) / 1000);
+    lastTime = now;
+    var t = now * 0.001;
+
     ctx.clearRect(0, 0, w, h);
 
+    /* Realistic organic wind wave (gentle breeze + periodic stronger gusts) */
+    var gust =
+      1.35 +
+      Math.sin(t * 0.55) * 0.85 +
+      Math.sin(t * 1.35 + 1.2) * 0.45 +
+      Math.sin(t * 2.6) * 0.18;
+    // Always has a noticeable breeze, peaking during gusts
+    var windSpeed = Math.max(0.45, gust);
+
+    /* 1. Sway Christmas Trees & Santa Hat in Sync with the Wind */
+    var baseSway = windSpeed * 2.4 + Math.sin(t * 2.2) * 0.65;
+    var topSway = windSpeed * 1.6 + Math.cos(t * 2.8) * 0.7;
+
+    if(treeLeft){
+      treeLeft.style.transform = 'rotate(' + baseSway.toFixed(2) + 'deg) skewX(' + (baseSway * 0.35).toFixed(2) + 'deg)';
+    }
+    if(treeLeftTop){
+      treeLeftTop.style.transform = 'rotate(' + topSway.toFixed(2) + 'deg)';
+    }
+    if(treeRight){
+      var rightBase = baseSway * 0.92 + Math.sin(t * 2.5 + 0.8) * 0.55;
+      treeRight.style.transform = 'rotate(' + rightBase.toFixed(2) + 'deg) skewX(' + (rightBase * 0.35).toFixed(2) + 'deg)';
+    }
+    if(treeRightTop){
+      treeRightTop.style.transform = 'rotate(' + (topSway * 0.95).toFixed(2) + 'deg)';
+    }
+    if(santaHat){
+      santaHat.style.transform = 'rotate(' + (-16 + windSpeed * 2.2).toFixed(1) + 'deg)';
+    }
+
+    /* 2. Draw Subtle Wind Mist Streaks During Gusts */
+    var gustIntensity = Math.max(0, (windSpeed - 1.1) / 1.7);
+    if(gustIntensity > 0.05){
+      ctx.lineCap = 'round';
+      for(var k = 0; k < windStreaks.length; k++){
+        var st = windStreaks[k];
+        var gradS = ctx.createLinearGradient(st.x, st.y, st.x + st.len, st.y + st.len * 0.14);
+        gradS.addColorStop(0, 'rgba(226, 239, 255, 0)');
+        gradS.addColorStop(0.5, 'rgba(226, 239, 255, ' + (st.alpha * gustIntensity).toFixed(3) + ')');
+        gradS.addColorStop(1, 'rgba(226, 239, 255, 0)');
+
+        ctx.strokeStyle = gradS;
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.moveTo(st.x, st.y);
+        ctx.lineTo(st.x + st.len, st.y + st.len * 0.14);
+        ctx.stroke();
+
+        st.x += (st.speed + windSpeed * 2.8) * (dt * 60);
+        st.y += (0.5 + windSpeed * 0.35) * (dt * 60);
+        if(st.x > w + 120){ st.x = -st.len - 20; st.y = Math.random() * h; }
+        if(st.y > h) st.y = 0;
+      }
+    }
+
+    /* 3. Draw Wind-Blown Snowflakes */
     for(var i = 0; i < flakes.length; i++){
       var f = flakes[i];
       ctx.beginPath();
@@ -383,13 +538,13 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       }
       ctx.fill();
 
-      f.y += f.speedY;
       f.phase += f.freq;
-      f.x += Math.sin(f.phase) * f.windAmp;
+      f.y += (f.speedY + Math.sin(f.phase) * 0.15) * (dt * 60);
+      f.x += (windSpeed * f.windFactor * 1.35 + Math.sin(f.phase) * 0.55) * (dt * 60);
 
       if(f.y > h + 8){ f.y = -8; f.x = Math.random() * w; }
-      if(f.x > w + 8) f.x = -8;
-      if(f.x < -8) f.x = w + 8;
+      if(f.x > w + 10) f.x = -10;
+      if(f.x < -10) f.x = w + 10;
     }
 
     requestAnimationFrame(animate);
