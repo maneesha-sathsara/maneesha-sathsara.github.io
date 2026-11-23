@@ -32,8 +32,29 @@ body{
     #070a12;
 }
 
-/* Fullscreen Canvas for Multi-Depth Snowfall & Golden Stardust */
-#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
+/* Fullscreen Canvas for Multi-Depth Snowfall */
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+
+/* Steady Lit Christmas Fairy Lights Along Top (No Blinking) */
+.lights{
+  position:fixed;top:-3px;left:0;width:100%;
+  display:flex;justify-content:space-around;
+  pointer-events:none;z-index:2;padding:0 10px;
+  border-top:1px solid rgba(242,245,251,.16);
+}
+.bulb{
+  position:relative;width:9px;height:14px;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  margin-top:5px;
+}
+.bulb::before{
+  content:"";position:absolute;top:-5px;left:2.5px;
+  width:4px;height:5px;background:#2b3245;border-radius:1px;
+}
+.bulb:nth-child(4n+1){background:#ffd166;box-shadow:0 0 14px 3px rgba(255,209,102,.65)}
+.bulb:nth-child(4n+2){background:#ff4d6d;box-shadow:0 0 14px 3px rgba(255,77,109,.65)}
+.bulb:nth-child(4n+3){background:#06d6a0;box-shadow:0 0 14px 3px rgba(6,214,160,.6)}
+.bulb:nth-child(4n+4){background:#72efdd;box-shadow:0 0 14px 3px rgba(114,239,221,.6)}
 
 /* Realistic Snow-Dusted Pine Trees at Bottom Corners */
 .tree-left{position:fixed;bottom:-4px;left:1vw;width:clamp(155px, 21vw, 270px);pointer-events:none;z-index:2;filter:drop-shadow(0 12px 26px rgba(0,0,0,.8))}
@@ -52,26 +73,8 @@ body{
   88%{opacity:1;transform:scale(1.24) rotate(2deg);filter:brightness(1.6)}
 }
 
-/* Realistic Moonlit Santa Claus & 4-Reindeer Sleigh */
-#santaSleigh{
-  position:fixed;top:0;left:0;width:255px;pointer-events:none;z-index:3;
-  will-change:transform;
-  filter:drop-shadow(0 10px 22px rgba(0, 0, 0, .65));
-}
-.leg-f1{transform-origin:top center;animation:gallopA .34s infinite ease-in-out alternate}
-.leg-b1{transform-origin:top center;animation:gallopB .34s infinite ease-in-out alternate}
-.leg-f2{transform-origin:top center;animation:gallopB .34s infinite ease-in-out alternate}
-.leg-b2{transform-origin:top center;animation:gallopA .34s infinite ease-in-out alternate}
-.deer-stride{transform-origin:center;animation:strideBob .34s infinite ease-in-out alternate}
-.lantern-glow{animation:lanternPulse 1.6s infinite ease-in-out alternate}
-
-@keyframes gallopA{0%{transform:rotate(-28deg)}100%{transform:rotate(28deg)}}
-@keyframes gallopB{0%{transform:rotate(28deg)}100%{transform:rotate(-28deg)}}
-@keyframes strideBob{0%{transform:translateY(-1.4px) rotate(-1.8deg)}100%{transform:translateY(1.4px) rotate(1.8deg)}}
-@keyframes lanternPulse{0%{opacity:.75;transform:scale(.94)}100%{opacity:1;transform:scale(1.08)}}
-
 /* No z-index on .wrap so mix-blend-mode:screen blends directly with body & erases the black box */
-.wrap{position:relative;max-width:900px;margin:0 auto;padding:44px 24px 32px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
+.wrap{position:relative;max-width:900px;margin:0 auto;padding:48px 24px 32px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
 
 /* Logo with Black Box Removed + Natural Felt Santa Hat on 'M' */
 .logo-wrap{position:relative;display:inline-block;margin-bottom:14px}
@@ -127,16 +130,24 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 @media (max-width:640px){
   .clock{gap:8px}
   .unit{padding:14px 4px 10px}
+  .bulb:nth-child(even){display:none}
   .tree-left{width:118px;left:-8px;opacity:.92}
   .tree-right{width:88px;right:-8px;opacity:.88}
-  #santaSleigh{width:165px}
 }
 </style>
 </head>
 <body>
 
-<!-- Canvas for Multi-Depth Natural Snowfall & Santa's Golden Stardust Trail -->
+<!-- Canvas for Multi-Depth Natural Snowfall -->
 <canvas id="fx" aria-hidden="true"></canvas>
+
+<!-- Steady Glowing Christmas Bulbs Along Top (No Blinking) -->
+<div class="lights" aria-hidden="true">
+  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+</div>
 
 <!-- Realistic Snow-Dusted Pine Christmas Tree + Wrapped Gifts (Bottom-Left) -->
 <svg class="tree-left" viewBox="0 0 280 340" fill="none" aria-hidden="true">
@@ -186,7 +197,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
   <path d="M114 96 Q145 112 174 102 M92 142 Q142 166 192 148 M72 192 Q140 220 208 196 M52 242 Q140 274 226 244" stroke="rgba(255,214,102,.28)" stroke-width="1.2" fill="none"/>
 
-  <!-- Steady Warm Fairy Lights on Left Tree (No Blinking) -->
+  <!-- Steady Warm Fairy Lights on Left Tree -->
   <circle cx="122" cy="100" r="6" fill="url(#steadyWarm)"/><circle cx="122" cy="100" r="1.7" fill="#fff8d6"/>
   <circle cx="158" cy="105" r="6" fill="url(#steadyWarm)"/><circle cx="158" cy="105" r="1.7" fill="#fff8d6"/>
   <circle cx="105" cy="148" r="7" fill="url(#steadyWarm)"/><circle cx="105" cy="148" r="1.9" fill="#fff8d6"/>
@@ -241,7 +252,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   <path d="M100 50 L54 122 Q78 118 100 124 Q122 118 146 122 Z" fill="url(#pineDark)"/>
   <path d="M100 50 L86 72 Q95 70 100 73 Q105 70 114 72 Z" fill="#f8fafc" opacity=".88"/>
 
-  <!-- Steady Warm Fairy Lights on Right Tree (No Blinking) -->
+  <!-- Steady Warm Fairy Lights on Right Tree -->
   <circle cx="84" cy="112" r="6" fill="url(#steadyWarm)"/><circle cx="84" cy="112" r="1.7" fill="#fff8d6"/>
   <circle cx="116" cy="154" r="6" fill="url(#steadyWarm)"/><circle cx="116" cy="154" r="1.7" fill="#fff8d6"/>
   <circle cx="74" cy="198" r="6" fill="url(#steadyWarm)"/><circle cx="74" cy="198" r="1.7" fill="#fff8d6"/>
@@ -254,105 +265,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <circle cx="100" cy="42.5" r="2.5" fill="#ffffff"/>
   </g>
 </svg>
-
-<!-- Cinematic Moonlit Silhouette: Santa Claus & 4 Galloping Reindeer -->
-<div id="santaSleigh" aria-hidden="true">
-  <svg viewBox="0 0 360 96" fill="none">
-    <defs>
-      <!-- Realistic dark winter silhouette with subtle silver moonlight rim -->
-      <linearGradient id="silhouetteGrad" x1="180" y1="10" x2="180" y2="85" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stop-color="#334155"/>
-        <stop offset="35%" stop-color="#1e293b"/>
-        <stop offset="100%" stop-color="#0b1120"/>
-      </linearGradient>
-      <radialGradient id="lanternHalo">
-        <stop offset="0%" stop-color="#fffbeb" stop-opacity="1"/>
-        <stop offset="35%" stop-color="#fbbf24" stop-opacity=".75"/>
-        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="rudolphHalo">
-        <stop offset="0%" stop-color="#ffe4e6" stop-opacity="1"/>
-        <stop offset="40%" stop-color="#f43f5e" stop-opacity=".7"/>
-        <stop offset="100%" stop-color="#e11d48" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-
-    <!-- Sleigh Runners with Golden Rim Highlight -->
-    <path d="M14 74 H96 C108 74, 114 66, 108 59 C105 56, 101 58, 102 61" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round"/>
-    <path d="M28 74 L32 63 M56 74 L58 64 M84 74 L82 63" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round"/>
-
-    <!-- Ornate Curved Victorian Sleigh Body -->
-    <path d="M16 42 C18 58, 28 64, 52 64 H88 C98 64, 104 54, 98 47 C90 52, 76 53, 66 44 C56 49, 32 49, 16 42 Z" fill="url(#silhouetteGrad)" stroke="rgba(226,232,240,.35)" stroke-width="1"/>
-
-    <!-- Overflowing Toy Sack -->
-    <path d="M24 44 C20 34, 28 24, 38 26 C46 27, 50 36, 46 45 Z" fill="#1e293b" stroke="rgba(226,232,240,.25)" stroke-width=".9"/>
-    <rect x="38" y="29" width="9" height="9" rx="1.2" transform="rotate(-12 38 29)" fill="#334155"/>
-
-    <!-- Santa Claus Silhouette -->
-    <path d="M55 46 C54 36, 60 31, 67 31 C73 31, 77 37, 76 46 Z" fill="url(#silhouetteGrad)"/>
-    <circle cx="66" cy="24" r="5" fill="#1e293b"/>
-    <!-- Flowing Beard -->
-    <path d="M66 25 C69 32, 74 31, 73 25 Z" fill="#cbd5e1" opacity=".85"/>
-    <!-- Santa Hat with Pom-pom -->
-    <path d="M61 21 C62 14, 69 13, 71 20 Z" fill="#991b1b"/>
-    <circle cx="59" cy="18" r="2.1" fill="#e2e8f0"/>
-    <!-- Arm holding reins -->
-    <path d="M68 35 L79 37" stroke="#334155" stroke-width="3.2" stroke-linecap="round"/>
-
-    <!-- Warm Glowing Brass Lantern on Sleigh Front -->
-    <g class="lantern-glow">
-      <circle cx="101" cy="48" r="14" fill="url(#lanternHalo)"/>
-      <circle cx="101" cy="48" r="2.4" fill="#fef3c7"/>
-    </g>
-
-    <!-- Taut Reins Connecting Sleigh to Reindeer Team -->
-    <path d="M79 37 Q 150 47, 296 34" stroke="rgba(226, 232, 240, .42)" stroke-width="1"/>
-    <path d="M79 37 Q 135 44, 238 35" stroke="rgba(226, 232, 240, .28)" stroke-width=".9"/>
-
-    <!-- Rear Pair Reindeer (Background, slightly smaller for depth) -->
-    <g class="deer-stride" style="animation-delay:-.17s" transform="translate(152, 24) scale(.92)">
-      <path d="M6 22 Q18 18 30 21 Q32 25 27 27 Q17 28 7 26 Z" fill="#0f172a"/>
-      <path d="M27 21 L33 11 L37 12 L32 23 Z" fill="#0f172a"/>
-      <ellipse cx="36" cy="11" rx="4.5" ry="2.8" fill="#0f172a"/>
-      <path d="M34 9 L31 1 M33 5 L36 3 M36 9 L39 2" stroke="#475569" stroke-width="1.2" stroke-linecap="round"/>
-      <path class="leg-b2" d="M10 25 L5 38" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-      <path class="leg-f2" d="M27 25 L33 38" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-    </g>
-
-    <!-- Rear Pair Reindeer (Foreground) -->
-    <g class="deer-stride" transform="translate(166, 26)">
-      <path d="M6 22 Q19 18 32 21 Q34 25 28 27 Q18 28 7 26 Z" fill="url(#silhouetteGrad)" stroke="rgba(226,232,240,.25)" stroke-width=".7"/>
-      <path d="M28 21 L34 11 L38 12 L33 23 Z" fill="url(#silhouetteGrad)"/>
-      <ellipse cx="37" cy="11" rx="4.8" ry="3" fill="#1e293b"/>
-      <path d="M35 9 L32 1 M34 5 L37 3 M37 9 L41 2" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/>
-      <path class="leg-b1" d="M10 25 L4 39" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round"/>
-      <path class="leg-f1" d="M28 25 L35 39" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round"/>
-    </g>
-
-    <!-- Lead Pair Reindeer (Background, slightly smaller for depth) -->
-    <g class="deer-stride" style="animation-delay:-.25s" transform="translate(246, 20) scale(.92)">
-      <path d="M6 22 Q18 18 30 21 Q32 25 27 27 Q17 28 7 26 Z" fill="#0f172a"/>
-      <path d="M27 21 L33 11 L37 12 L32 23 Z" fill="#0f172a"/>
-      <ellipse cx="36" cy="11" rx="4.5" ry="2.8" fill="#0f172a"/>
-      <path d="M34 9 L31 1 M33 5 L36 3 M36 9 L39 2" stroke="#475569" stroke-width="1.2" stroke-linecap="round"/>
-      <path class="leg-f2" d="M10 25 L5 38" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-      <path class="leg-b2" d="M27 25 L33 38" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
-    </g>
-
-    <!-- Lead Reindeer (Rudolph - Foreground with Subtle Red Nose Glow) -->
-    <g class="deer-stride" style="animation-delay:-.1s" transform="translate(262, 22)">
-      <path d="M6 22 Q19 18 32 21 Q34 25 28 27 Q18 28 7 26 Z" fill="url(#silhouetteGrad)" stroke="rgba(226,232,240,.3)" stroke-width=".7"/>
-      <path d="M28 21 L34 11 L38 12 L33 23 Z" fill="url(#silhouetteGrad)"/>
-      <ellipse cx="37" cy="11" rx="4.8" ry="3" fill="#1e293b"/>
-      <path d="M35 9 L32 1 M34 5 L37 3 M37 9 L41 2" stroke="#cbd5e1" stroke-width="1.3" stroke-linecap="round"/>
-      <path class="leg-f1" d="M10 25 L4 39" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round"/>
-      <path class="leg-b1" d="M28 25 L35 39" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round"/>
-      <!-- Soft Atmospheric Red Glow -->
-      <circle cx="42" cy="11" r="10" fill="url(#rudolphHalo)"/>
-      <circle cx="42" cy="11" r="2.1" fill="#fb7185"/>
-    </g>
-  </svg>
-</div>
 
 <div class="wrap">
   <main>
@@ -420,12 +332,10 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   }
   tick(); setInterval(tick, 1000);
 
-  /* High-DPI Multi-Layer Snow + Natural Sweeping Sky Flight for Santa */
+  /* High-DPI Multi-Layer Natural Snowfall */
   var canvas = $('fx');
   var ctx = canvas.getContext('2d');
-  var santaEl = $('santaSleigh');
   var flakes = [];
-  var stardust = [];
   var w, h, dpr;
 
   function resize(){
@@ -439,7 +349,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   window.addEventListener('resize', resize);
   resize();
 
-  /* 3 Depth Layers of Snowflakes (Works on All Mobile & Desktop Devices) */
   var totalFlakes = Math.min(125, Math.max(55, Math.floor(w / 9)));
   for(var i = 0; i < totalFlakes; i++){
     var depth = Math.random();
@@ -456,79 +365,9 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     });
   }
 
-  /* Natural Sweeping Flight Path Around the Site (No Squishing or Vertical Nose-Dives) */
-  var theta = -Math.PI * 0.5;
-  var lastTime = performance.now();
-  var frameCount = 0;
-
-  function animate(now){
-    var dt = Math.min(0.05, (now - lastTime) / 1000);
-    lastTime = now;
+  function animate(){
     ctx.clearRect(0, 0, w, h);
-    frameCount++;
 
-    /* 1. Santa Sleigh Flying in Graceful Sweeping Arcs Around the Site */
-    if(santaEl){
-      // 1 full cycle every ~18 seconds
-      theta += dt * ((Math.PI * 2) / 18);
-
-      var sw = santaEl.offsetWidth || 220;
-      var sh = santaEl.offsetHeight || 65;
-
-      // Sweeps wide across the top sky, curves gracefully down the sides, and sweeps back across the lower sky
-      var rx = (w * 0.5) + (sw * 0.35);
-      var ry = h * 0.38;
-      var cx = w * 0.5;
-      var cy = h * 0.49;
-
-      var px = cx + rx * Math.sin(theta);
-      var py = cy - ry * Math.cos(theta) + Math.sin(theta * 2) * 18;
-
-      var vx = rx * Math.cos(theta);
-      var vy = ry * Math.sin(theta) + Math.cos(theta * 2) * 36;
-
-      var dir = vx >= 0 ? 1 : -1;
-      // Gentle aerodynamic pitch (-14 deg to +14 deg) so reindeer always fly naturally
-      var pitchDeg = Math.max(-14, Math.min(14, Math.atan2(vy, Math.abs(vx) + w * 0.35) * (180 / Math.PI)));
-
-      santaEl.style.transform =
-        'translate3d(' + (px - sw * 0.5).toFixed(1) + 'px,' + (py - sh * 0.5).toFixed(1) + 'px,0) ' +
-        'scaleX(' + dir + ') ' +
-        'rotate(' + pitchDeg.toFixed(1) + 'deg)';
-
-      // Emit subtle golden stardust from sleigh runners while visible on screen
-      if(frameCount % 2 === 0 && px > -60 && px < w + 60){
-        var tailX = px - dir * (sw * 0.38);
-        var tailY = py + sh * 0.2;
-        stardust.push({
-          x: tailX + (Math.random() - 0.5) * 6,
-          y: tailY + (Math.random() - 0.5) * 5,
-          vx: -dir * 0.4 + (Math.random() - 0.5) * 0.25,
-          vy: 0.25 + Math.random() * 0.35,
-          r: Math.random() * 1.8 + 0.8,
-          life: 1
-        });
-      }
-    }
-
-    /* 2. Render Golden Stardust Trail */
-    for(var s = stardust.length - 1; s >= 0; s--){
-      var pt = stardust[s];
-      ctx.save();
-      ctx.globalAlpha = pt.life * 0.78;
-      ctx.beginPath();
-      ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
-      ctx.fillStyle = pt.life > 0.5 ? '#fef08a' : '#f59e0b';
-      ctx.fill();
-      ctx.restore();
-
-      pt.x += pt.vx;
-      pt.y += pt.vy;
-      pt.life -= 0.018;
-      if(pt.life <= 0) stardust.splice(s, 1);
-    }
-
-    /* 3. Render Multi-Depth Snowfall */
     for(var i = 0; i < flakes.length; i++){
       var f = flakes[i];
       ctx.beginPath();
