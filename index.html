@@ -22,64 +22,101 @@
   --body:"DM Sans","Segoe UI",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:radial-gradient(circle at 50% 0%, #0f172a 0%, var(--bg) 65%);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;overflow-x:hidden;position:relative}
+
+/* Subtle festive glow behind countdown only (keeps logo background pure #070a12) */
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 50% 62%, rgba(230,57,70,.08) 0%, rgba(15,23,42,.25) 35%, transparent 70%);pointer-events:none;z-index:0}
 
 /* Falling Snow Canvas */
-#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 
 /* Top Christmas Fairy Lights */
-.lights{position:fixed;top:-4px;left:0;width:100%;display:flex;justify-content:space-around;pointer-events:none;z-index:2;padding:0 12px;border-top:1px solid rgba(242,245,251,.12)}
+.lights{position:fixed;top:-4px;left:0;width:100%;display:flex;justify-content:space-around;pointer-events:none;z-index:4;padding:0 12px;border-top:1px solid rgba(242,245,251,.14)}
 .bulb{position:relative;width:9px;height:13px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;margin-top:5px;animation:twinkle 2.4s infinite ease-in-out alternate}
 .bulb::before{content:"";position:absolute;top:-5px;left:2.5px;width:4px;height:5px;background:#2b3245;border-radius:1px}
-.bulb:nth-child(4n+1){background:#ffd166;box-shadow:0 0 12px 2px rgba(255,209,102,.65);animation-delay:0s}
-.bulb:nth-child(4n+2){background:#ff4d6d;box-shadow:0 0 12px 2px rgba(255,77,109,.65);animation-delay:.6s}
-.bulb:nth-child(4n+3){background:#06d6a0;box-shadow:0 0 12px 2px rgba(6,214,160,.6);animation-delay:1.2s}
-.bulb:nth-child(4n+4){background:#72efdd;box-shadow:0 0 12px 2px rgba(114,239,221,.6);animation-delay:1.8s}
+.bulb:nth-child(4n+1){background:#ffd166;box-shadow:0 0 12px 2px rgba(255,209,102,.7);animation-delay:0s}
+.bulb:nth-child(4n+2){background:#ff4d6d;box-shadow:0 0 12px 2px rgba(255,77,109,.7);animation-delay:.6s}
+.bulb:nth-child(4n+3){background:#06d6a0;box-shadow:0 0 12px 2px rgba(6,214,160,.65);animation-delay:1.2s}
+.bulb:nth-child(4n+4){background:#72efdd;box-shadow:0 0 12px 2px rgba(114,239,221,.65);animation-delay:1.8s}
 @keyframes twinkle{
   0%{opacity:.4;transform:scale(.92)}
   100%{opacity:1;transform:scale(1.06)}
 }
 
-.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:44px 24px 36px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
+/* Hanging Geddi (Ornaments / Baubles) */
+.ornaments{position:fixed;top:0;left:0;width:100%;pointer-events:none;z-index:3}
+.ornament{position:absolute;top:0;display:flex;flex-direction:column;align-items:center;transform-origin:top center;animation:swing 4.5s ease-in-out infinite alternate}
+.ornament.o1{left:6%;animation-duration:4.8s}
+.ornament.o2{left:13%;animation-duration:3.9s;animation-delay:-1.2s}
+.ornament.o3{right:13%;animation-duration:4.2s;animation-delay:-2s}
+.ornament.o4{right:6%;animation-duration:5s;animation-delay:-.6s}
+.string{width:1.5px;background:linear-gradient(to bottom, rgba(242,245,251,.25), rgba(255,209,102,.6))}
+@keyframes swing{
+  0%{transform:rotate(-4deg)}
+  100%{transform:rotate(4deg)}
+}
 
-/* Logo + Santa Hat */
+/* Flying Santa Claus & Sleigh */
+.santa-fly{position:fixed;top:12%;left:-280px;width:230px;pointer-events:none;z-index:1;opacity:.85;animation:flyAcross 24s linear infinite;animation-delay:1s;filter:drop-shadow(0 6px 14px rgba(255,209,102,.2))}
+@keyframes flyAcross{
+  0%{transform:translate3d(0, 12px, 0) rotate(-3deg)}
+  25%{transform:translate3d(32vw, -16px, 0) rotate(2deg)}
+  50%{transform:translate3d(65vw, 8px, 0) rotate(-2deg)}
+  75%{transform:translate3d(98vw, -14px, 0) rotate(2deg)}
+  100%{transform:translate3d(calc(100vw + 320px), 6px, 0) rotate(-2deg)}
+}
+
+.wrap{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:44px 24px 32px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* Logo without rectangle + Santa Hat right on the 'M' */
 .logo-wrap{position:relative;display:inline-block;margin-bottom:14px}
-.logo{display:block;width:clamp(104px,12vw,144px);height:auto}
-.santa-hat{position:absolute;top:-18px;left:-14px;width:46px;height:46px;transform:rotate(-22deg);pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45))}
+.logo{display:block;width:clamp(116px,13vw,154px);height:auto;mix-blend-mode:lighten}
+.santa-hat{position:absolute;top:-3%;left:10.5%;width:24%;height:auto;transform:rotate(-15deg);pointer-events:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6));z-index:2}
 
 main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
 .rise{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
-.chip{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(242,245,251,.03);margin-bottom:26px}
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(242,245,251,.03);margin-bottom:24px}
 .dot{width:8px;height:8px;border-radius:50%;background:#ff4d6d;box-shadow:0 0 0 0 rgba(255,77,109,.6);animation:pulse 2s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(255,77,109,0)}100%{box-shadow:0 0 0 0 rgba(255,77,109,0)}}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,7vw,5rem);line-height:1.06;letter-spacing:-.015em;font-variant-ligatures:none}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.5rem,6.8vw,4.8rem);line-height:1.06;letter-spacing:-.015em;font-variant-ligatures:none}
 h1 span{display:block;color:var(--muted)}
 
 /* Countdown with Frosted Snow Rim */
-.clock{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;width:100%;max-width:560px}
+.clock{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px;width:100%;max-width:560px}
 .unit{position:relative;padding:20px 8px 14px;border-radius:18px;background:rgba(242,245,251,.04);border:1px solid var(--line);backdrop-filter:blur(4px)}
-.unit::before{content:"";position:absolute;top:-1px;left:12%;right:12%;height:3px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(242,245,251,.8),transparent);box-shadow:0 2px 10px rgba(242,245,251,.35)}
+.unit::before{content:"";position:absolute;top:-1px;left:12%;right:12%;height:3px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(242,245,251,.85),transparent);box-shadow:0 2px 10px rgba(242,245,251,.35)}
 .unit b{display:block;font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
 .unit span{display:block;margin-top:8px;color:var(--muted);font-size:.85rem}
-.when{margin-top:22px;color:var(--muted);font-size:1rem}
+.when{margin-top:20px;color:var(--muted);font-size:1rem}
+
+/* X-mas Gifts Cluster */
+.gifts{margin-top:24px;margin-bottom:10px;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1);display:inline-flex;align-items:flex-end;justify-content:center}
+.gifts:hover{transform:translateY(-4px) scale(1.04)}
+.gifts:active{transform:scale(.97)}
+
 .live{display:none}
 .live p{font-family:var(--display);font-size:1.8rem;font-weight:600;margin-bottom:18px}
 .btn{display:inline-block;padding:13px 26px;border-radius:12px;font-weight:500;color:var(--bg);text-decoration:none;background:var(--ink)}
 body.launched .clock,body.launched .when,body.launched .chip,body.launched h1{display:none}
 body.launched .live{display:block}
-footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;color:var(--muted);font-size:.95rem}
+footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;color:var(--muted);font-size:.95rem;padding-top:8px}
 footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .2s}
 footer a:hover{border-color:var(--ink)}
 a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
-@media (max-width:480px){
+
+@media (max-width:640px){
   .clock{gap:8px}
   .unit{padding:14px 4px 10px}
-  .santa-hat{width:38px;height:38px;top:-14px;left:-10px}
+  .ornament.o2,.ornament.o3{display:none}
+  .ornament.o1{left:4%}
+  .ornament.o4{right:4%}
   .bulb:nth-child(even){display:none}
+  .santa-fly{width:170px;top:15%}
 }
 @media (prefers-reduced-motion:reduce){
-  .dot,.bulb{animation:none}
+  .dot,.bulb,.ornament,.santa-fly{animation:none}
+  .santa-fly{display:none}
   .rise{animation:none;opacity:1;transform:none}
 }
 </style>
@@ -87,7 +124,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 
-<!-- String of Christmas Lights -->
+<!-- Top Christmas Fairy Lights -->
 <div class="lights" aria-hidden="true">
   <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
   <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
@@ -95,10 +132,131 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
 </div>
 
+<!-- Hanging Geddi (Christmas Ornaments) -->
+<div class="ornaments" aria-hidden="true">
+  <!-- Left Red Bauble -->
+  <div class="ornament o1">
+    <div class="string" style="height:56px"></div>
+    <svg width="32" height="38" viewBox="0 0 32 38" fill="none">
+      <rect x="12" y="1" width="8" height="5" rx="1.5" fill="#ffd166"/>
+      <circle cx="16" cy="21" r="14" fill="url(#redBall)"/>
+      <path d="M4 18C10 22 22 22 28 18" stroke="#ffd166" stroke-width="1.6" stroke-dasharray="2 2"/>
+      <circle cx="11" cy="15" r="3" fill="rgba(255,255,255,.35)"/>
+      <defs>
+        <radialGradient id="redBall" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11 14) rotate(45) scale(24)">
+          <stop stop-color="#ff6b81"/>
+          <stop offset=".6" stop-color="#e63946"/>
+          <stop offset="1" stop-color="#800f2f"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Left Gold Bauble -->
+  <div class="ornament o2">
+    <div class="string" style="height:32px"></div>
+    <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
+      <rect x="9" y="1" width="6" height="4" rx="1" fill="#f8fafc"/>
+      <circle cx="12" cy="17" r="10.5" fill="url(#goldBall)"/>
+      <circle cx="8.5" cy="13" r="2.2" fill="rgba(255,255,255,.45)"/>
+      <defs>
+        <radialGradient id="goldBall" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(8 12) rotate(45) scale(18)">
+          <stop stop-color="#ffe699"/>
+          <stop offset=".65" stop-color="#f4a261"/>
+          <stop offset="1" stop-color="#9c6644"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Right Emerald Bauble -->
+  <div class="ornament o3">
+    <div class="string" style="height:36px"></div>
+    <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
+      <rect x="9" y="1" width="6" height="4" rx="1" fill="#ffd166"/>
+      <circle cx="12" cy="17" r="10.5" fill="url(#greenBall)"/>
+      <circle cx="8.5" cy="13" r="2.2" fill="rgba(255,255,255,.4)"/>
+      <defs>
+        <radialGradient id="greenBall" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(8 12) rotate(45) scale(18)">
+          <stop stop-color="#52b788"/>
+          <stop offset=".65" stop-color="#2d6a4f"/>
+          <stop offset="1" stop-color="#1b4332"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Right Red & Gold Bauble -->
+  <div class="ornament o4">
+    <div class="string" style="height:64px"></div>
+    <svg width="32" height="38" viewBox="0 0 32 38" fill="none">
+      <rect x="12" y="1" width="8" height="5" rx="1.5" fill="#ffd166"/>
+      <circle cx="16" cy="21" r="14" fill="url(#redBall2)"/>
+      <path d="M5 24C11 20 21 20 27 24" stroke="#ffd166" stroke-width="1.6"/>
+      <circle cx="11" cy="15" r="3" fill="rgba(255,255,255,.35)"/>
+      <defs>
+        <radialGradient id="redBall2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11 14) rotate(45) scale(24)">
+          <stop stop-color="#ff6b81"/>
+          <stop offset=".6" stop-color="#d62828"/>
+          <stop offset="1" stop-color="#6a040f"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+</div>
+
+<!-- Flying Santa Claus & Rudolph Sleigh -->
+<div class="santa-fly" aria-hidden="true">
+  <svg viewBox="0 0 260 80" fill="none">
+    <!-- Stardust Trail -->
+    <path d="M4 56 Q 45 48, 82 54" stroke="url(#trail)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 5"/>
+    <!-- Sleigh -->
+    <path d="M42 62 H108 C116 62, 120 55, 116 50" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M54 62 V55 M94 62 V55" stroke="#ffd166" stroke-width="2"/>
+    <path d="M48 40 C48 52, 56 55, 75 55 H102 C108 55, 112 46, 106 42 C98 46, 86 46, 78 40 Z" fill="#e63946"/>
+    <!-- Gift Sack in Sleigh -->
+    <circle cx="62" cy="39" r="9" fill="#b5179e"/>
+    <rect x="67" y="34" width="10" height="10" rx="1.5" fill="#06d6a0"/>
+    <!-- Santa Claus -->
+    <circle cx="86" cy="36" r="8" fill="#e63946"/>
+    <circle cx="88" cy="26" r="5" fill="#ffcdb2"/>
+    <!-- Santa Beard -->
+    <path d="M85 27 C86 33, 93 33, 94 27 Z" fill="#ffffff"/>
+    <!-- Santa Hat -->
+    <path d="M82 23 C84 16, 91 17, 93 23 Z" fill="#e63946"/>
+    <circle cx="81" cy="22" r="2.2" fill="#ffffff"/>
+    <!-- Reins -->
+    <path d="M93 34 Q 130 44, 178 36" stroke="rgba(255,209,102,.65)" stroke-width="1.2"/>
+    <!-- Reindeer 1 -->
+    <g transform="translate(145, 22)">
+      <ellipse cx="18" cy="22" rx="11" ry="6" fill="#bc6c25"/>
+      <circle cx="28" cy="14" r="4.5" fill="#bc6c25"/>
+      <path d="M27 10 L25 3 M29 10 L32 4" stroke="#dda15e" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M11 26 L7 36 M15 27 L14 37 M23 26 L27 36 M26 25 L31 35" stroke="#9c6644" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <!-- Rudolph (Lead Reindeer with Glowing Red Nose) -->
+    <g transform="translate(192, 18)">
+      <ellipse cx="18" cy="22" rx="11" ry="6" fill="#dda15e"/>
+      <circle cx="28" cy="14" r="4.5" fill="#dda15e"/>
+      <path d="M27 10 L25 3 M29 10 L32 4" stroke="#faedcd" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M11 26 L7 36 M15 27 L14 37 M23 26 L27 36 M26 25 L31 35" stroke="#bc6c25" stroke-width="2" stroke-linecap="round"/>
+      <!-- Glowing Nose -->
+      <circle cx="33.5" cy="14.5" r="2.6" fill="#ff2a55"/>
+      <circle cx="33.5" cy="14.5" r="6" fill="rgba(255,42,85,.45)"/>
+    </g>
+    <defs>
+      <linearGradient id="trail" x1="4" y1="56" x2="82" y2="54" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#ffd166" stop-opacity="0"/>
+        <stop offset="1" stop-color="#ffd166" stop-opacity=".9"/>
+      </linearGradient>
+    </defs>
+  </svg>
+</div>
+
 <div class="wrap">
   <main>
     <div class="logo-wrap">
-      <!-- Crisp SVG Santa Hat -->
+      <!-- Crisp SVG Santa Hat sitting right on the left peak of 'M' -->
       <svg class="santa-hat" viewBox="0 0 64 64" fill="none" aria-hidden="true">
         <path d="M14 44C16 24 30 12 48 14C43 24 44 34 48 44H14Z" fill="#e63946"/>
         <path d="M32 14C39 13 44 13.5 48 14C44 21 44 29 46 37C39 30 35 21 32 14Z" fill="#c1121f"/>
@@ -117,6 +275,30 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       <div class="unit"><b id="s">00</b><span>seconds</span></div>
     </div>
     <p class="when rise" style="animation-delay:.3s">1 January 2027, 12:00 am (Sri Lanka time)</p>
+
+    <!-- X-mas Gift Boxes (Click for a festive snow burst!) -->
+    <div class="gifts rise" id="giftBox" style="animation-delay:.4s" title="Click for Christmas magic!">
+      <svg width="136" height="58" viewBox="0 0 136 58" fill="none" aria-label="Christmas gifts">
+        <!-- Left Green Gift -->
+        <rect x="8" y="24" width="32" height="30" rx="4" fill="#1b4332" stroke="#2d6a4f" stroke-width="1.2"/>
+        <rect x="6" y="20" width="36" height="6" rx="2" fill="#2d6a4f"/>
+        <rect x="21" y="20" width="6" height="34" fill="#ffd166"/>
+        <path d="M24 20 C18 12, 13 16, 20 20 M24 20 C30 12, 35 16, 28 20" stroke="#ffd166" stroke-width="2.2" stroke-linecap="round"/>
+
+        <!-- Center Big Red Gift -->
+        <rect x="46" y="14" width="44" height="40" rx="5" fill="#c1121f" stroke="#e63946" stroke-width="1.2"/>
+        <rect x="43" y="9" width="50" height="7" rx="2.5" fill="#e63946"/>
+        <rect x="64" y="9" width="8" height="45" fill="#ffd166"/>
+        <path d="M68 9 C60 -1, 53 4, 63 9 M68 9 C76 -1, 83 4, 73 9" stroke="#ffd166" stroke-width="2.6" stroke-linecap="round"/>
+
+        <!-- Right Navy/Gold Gift -->
+        <rect x="96" y="26" width="30" height="28" rx="4" fill="#1d3557" stroke="#457b9d" stroke-width="1.2"/>
+        <rect x="94" y="22" width="34" height="6" rx="2" fill="#457b9d"/>
+        <rect x="108" y="22" width="6" height="32" fill="#ff4d6d"/>
+        <path d="M111 22 C105 14, 100 18, 107 22 M111 22 C117 14, 122 18, 115 22" stroke="#ff4d6d" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <div class="live">
       <p>The new portfolio is live.</p>
       <a class="btn" id="enter" href="">Enter the site</a>
@@ -129,7 +311,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <a href="Maneesha_Sathsara_CV.pdf">Download CV</a>
   </footer>
 </div>
-<noscript><p style="position:relative;z-index:1;text-align:center;padding:0 24px 24px;color:#8e9ab8">This page counts down to 1 January 2027, 12:00 am Sri Lanka time. Please enable JavaScript to see the timer.</p></noscript>
+<noscript><p style="position:relative;z-index:2;text-align:center;padding:0 24px 24px;color:#8e9ab8">This page counts down to 1 January 2027, 12:00 am Sri Lanka time. Please enable JavaScript to see the timer.</p></noscript>
 
 <script>
 (function(){
@@ -156,10 +338,11 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   }
   tick(); setInterval(tick, 1000);
 
-  /* falling snow */
+  /* falling snow + interactive sparkle burst on gift click */
   var canvas = $('snow');
   var ctx = canvas.getContext('2d');
   var flakes = [];
+  var sparks = [];
   var w, h;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -170,7 +353,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   window.addEventListener('resize', resize);
   resize();
 
-  var count = Math.min(85, Math.floor(w / 15));
+  var count = Math.min(95, Math.floor(w / 14));
   for(var i = 0; i < count; i++){
     flakes.push({
       x: Math.random() * w,
@@ -179,6 +362,28 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       speed: Math.random() * 0.9 + 0.35,
       drift: Math.random() * Math.PI * 2,
       opacity: Math.random() * 0.55 + 0.25
+    });
+  }
+
+  var giftBox = $('giftBox');
+  if(giftBox){
+    giftBox.addEventListener('click', function(e){
+      var rect = giftBox.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      var colors = ['#ffd166', '#ff4d6d', '#06d6a0', '#ffffff'];
+      for(var j = 0; j < 28; j++){
+        var angle = Math.random() * Math.PI * 2;
+        var vel = Math.random() * 4 + 1.5;
+        sparks.push({
+          x: cx, y: cy,
+          vx: Math.cos(angle) * vel,
+          vy: Math.sin(angle) * vel - 2,
+          life: 1,
+          color: colors[j % colors.length],
+          r: Math.random() * 2.5 + 1.5
+        });
+      }
     });
   }
 
@@ -200,6 +405,23 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
         if(f.x < -5) f.x = w + 5;
       }
     }
+
+    for(var k = sparks.length - 1; k >= 0; k--){
+      var sp = sparks[k];
+      ctx.save();
+      ctx.globalAlpha = sp.life;
+      ctx.beginPath();
+      ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
+      ctx.fillStyle = sp.color;
+      ctx.fill();
+      ctx.restore();
+      sp.x += sp.vx;
+      sp.y += sp.vy;
+      sp.vy += 0.08;
+      sp.life -= 0.022;
+      if(sp.life <= 0) sparks.splice(k, 1);
+    }
+
     if(!reducedMotion) requestAnimationFrame(drawSnow);
   }
   drawSnow();
