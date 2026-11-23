@@ -20,41 +20,26 @@
   --bg:#070a12; --ink:#f2f5fb; --muted:rgba(242,245,251,.65); --line:rgba(242,245,251,.15);
   --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
   --body:"DM Sans","Segoe UI",system-ui,sans-serif;
+  --hat-delay: 1.5s; /* Adjust this if your MS GIF finishes slightly earlier or later */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;overflow-x:hidden}
 
-/* Natural Winter Night Sky Atmosphere */
+/* Pure #070a12 at top/center so logo blends seamlessly with zero rectangle */
 body{
   background:
-    radial-gradient(ellipse 85% 50% at 50% -10%, rgba(36, 62, 110, .36) 0%, transparent 70%),
     radial-gradient(ellipse 100% 35% at 50% 100%, rgba(180, 210, 255, .12) 0%, transparent 75%),
     #070a12;
 }
 
-/* Fullscreen Canvas for Blowing Snow, Wind Mist & Ground Spindrift */
+/* Fullscreen Canvas for Blowing Snow & Wind Mist */
 #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
 
-/* Steady Lit Christmas Fairy Lights Along Top (No Blinking) */
-.lights{
-  position:fixed;top:-3px;left:0;width:100%;
-  display:flex;justify-content:space-around;
-  pointer-events:none;z-index:4;padding:0 10px;
-  border-top:1px solid rgba(242,245,251,.16);
+/* Sagging Wire & Irregularly Spaced Hanging Christmas Bulbs (Steady Lit) */
+.wire-garland{
+  position:fixed;top:0;left:0;width:100%;height:68px;
+  pointer-events:none;z-index:3;
 }
-.bulb{
-  position:relative;width:9px;height:14px;
-  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-  margin-top:5px;
-}
-.bulb::before{
-  content:"";position:absolute;top:-5px;left:2.5px;
-  width:4px;height:5px;background:#2b3245;border-radius:1px;
-}
-.bulb:nth-child(4n+1){background:#ffd166;box-shadow:0 0 14px 3px rgba(255,209,102,.65)}
-.bulb:nth-child(4n+2){background:#ff4d6d;box-shadow:0 0 14px 3px rgba(255,77,109,.65)}
-.bulb:nth-child(4n+3){background:#06d6a0;box-shadow:0 0 14px 3px rgba(6,214,160,.6)}
-.bulb:nth-child(4n+4){background:#72efdd;box-shadow:0 0 14px 3px rgba(114,239,221,.6)}
 
 /* Snow-Covered Ground Layers (Back & Front Drifts) */
 .snow-ground-back{
@@ -103,24 +88,34 @@ body{
   88%{opacity:1;transform:scale(1.24) rotate(2deg);filter:brightness(1.6)}
 }
 
-/* No z-index on .wrap so mix-blend-mode:screen blends directly with body & erases the black box */
-.wrap{position:relative;max-width:900px;margin:0 auto;padding:48px 24px 36px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
+/* IMPORTANT: No z-index on .wrap or main so mix-blend-mode:lighten blends directly with body #070a12 */
+.wrap{position:relative;max-width:900px;margin:0 auto;padding:54px 24px 36px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
 
-/* Logo with Black Box Removed + Natural Felt Santa Hat on 'M' */
+/* Logo with Black Box Completely Erased + Santa Hat Appearing After 'MS' Forms */
 .logo-wrap{position:relative;display:inline-block;margin-bottom:14px}
 .logo{
-  display:block;width:clamp(118px,13vw,156px);height:auto;
-  mix-blend-mode:screen;
-  filter:brightness(1.08) contrast(1.16);
+  display:block;width:clamp(120px,13.5vw,160px);height:auto;
+  mix-blend-mode:lighten;
+  filter:contrast(1.42) brightness(1.06);
+}
+.hat-anchor{
+  position:absolute;top:-5%;left:11%;width:23.5%;
+  opacity:0;
+  transform:translateY(-16px) scale(.65);
+  animation:hatAppear .65s cubic-bezier(.22, 1.28, .36, 1) var(--hat-delay) forwards;
+  pointer-events:none;
+}
+@keyframes hatAppear{
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
 .santa-hat{
-  position:absolute;top:-4%;left:10%;width:24%;height:auto;
+  display:block;width:100%;height:auto;
   transform-origin:bottom center;
-  transform:rotate(-16deg);pointer-events:none;
-  filter:drop-shadow(0 3px 5px rgba(0,0,0,.75));
+  transform:rotate(-16deg);
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,.85));
 }
 
-main{position:relative;z-index:5;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
+main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
 .rise{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
 .chip{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(12,17,30,.55);backdrop-filter:blur(8px);margin-bottom:24px}
@@ -160,7 +155,7 @@ footer{
   display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;
   color:var(--muted);font-size:.92rem;
   padding:8px 18px;border-radius:999px;
-  background:rgba(7, 10, 18, .62);
+  background:rgba(7, 10, 18, .65);
   backdrop-filter:blur(8px);
   border:1px solid rgba(242, 245, 251, .1);
 }
@@ -171,7 +166,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 @media (max-width:640px){
   .clock{gap:8px}
   .unit{padding:14px 4px 10px}
-  .bulb:nth-child(even){display:none}
+  .wire-garland{height:48px}
   .tree-left{width:118px;left:-10px}
   .tree-right{width:88px;right:-10px}
   footer{gap:8px 16px;font-size:.85rem;padding:7px 14px}
@@ -180,16 +175,174 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 </head>
 <body>
 
-<!-- Canvas for Wind-Blown Snowfall, Mist & Spindrift -->
+<!-- Canvas for Wind-Blown Snowfall & Wind Mist -->
 <canvas id="fx" aria-hidden="true"></canvas>
 
-<!-- Steady Glowing Christmas Bulbs Along Top (No Blinking) -->
-<div class="lights" aria-hidden="true">
-  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
-  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
-  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
-  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
-</div>
+<!-- Sagging Wire with Irregularly Spaced Hanging Christmas Bulbs (Steady Lit) -->
+<svg class="wire-garland" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <radialGradient id="bGold">
+      <stop offset="0%" stop-color="#fff8d6" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffd166" stop-opacity=".65"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bRed">
+      <stop offset="0%" stop-color="#ffe5ec" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ff4d6d" stop-opacity=".65"/>
+      <stop offset="100%" stop-color="#ff4d6d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bGreen">
+      <stop offset="0%" stop-color="#e6fcf5" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#06d6a0" stop-opacity=".6"/>
+      <stop offset="100%" stop-color="#06d6a0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bCyan">
+      <stop offset="0%" stop-color="#edf6f9" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#72efdd" stop-opacity=".6"/>
+      <stop offset="100%" stop-color="#72efdd" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Natural Sagging Wire Loops Across Top -->
+  <path d="M-10 3 Q 170 42, 355 8 Q 555 48, 755 6 Q 965 44, 1155 10 Q 1305 38, 1450 4" stroke="rgba(203, 213, 225, .28)" stroke-width="1.3" fill="none"/>
+
+  <!-- Irregularly Spaced Bulbs Hanging on Drop-Cords from the Wire -->
+  <!-- Bulb 1 (x=52, wire y=13) -->
+  <g transform="translate(52, 13) rotate(-6)">
+    <line x1="0" y1="0" x2="0" y2="7" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="6" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="17" r="14" fill="url(#bGold)"/>
+    <path d="M-3.5 11 C-4.5 16, -2.5 22, 0 22 C2.5 22, 4.5 16, 3.5 11 Z" fill="#ffd166"/>
+  </g>
+
+  <!-- Bulb 2 (x=128, wire y=21) -->
+  <g transform="translate(128, 21) rotate(5)">
+    <line x1="0" y1="0" x2="0" y2="9" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="8" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="19" r="14" fill="url(#bRed)"/>
+    <path d="M-3.5 13 C-4.5 18, -2.5 24, 0 24 C2.5 24, 4.5 18, 3.5 13 Z" fill="#ff4d6d"/>
+  </g>
+
+  <!-- Bulb 3 (x=182, wire y=23 — closer cluster) -->
+  <g transform="translate(182, 23) rotate(-4)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="5" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="16" r="14" fill="url(#bGreen)"/>
+    <path d="M-3.5 10 C-4.5 15, -2.5 21, 0 21 C2.5 21, 4.5 15, 3.5 10 Z" fill="#06d6a0"/>
+  </g>
+
+  <!-- Bulb 4 (x=285, wire y=17 — wider gap) -->
+  <g transform="translate(285, 17) rotate(7)">
+    <line x1="0" y1="0" x2="0" y2="8" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="7" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="18" r="14" fill="url(#bCyan)"/>
+    <path d="M-3.5 12 C-4.5 17, -2.5 23, 0 23 C2.5 23, 4.5 17, 3.5 12 Z" fill="#72efdd"/>
+  </g>
+
+  <!-- Bulb 5 (x=348, wire y=9) -->
+  <g transform="translate(348, 9) rotate(-5)">
+    <line x1="0" y1="0" x2="0" y2="7" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="6" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="17" r="14" fill="url(#bGold)"/>
+    <path d="M-3.5 11 C-4.5 16, -2.5 22, 0 22 C2.5 22, 4.5 16, 3.5 11 Z" fill="#ffd166"/>
+  </g>
+
+  <!-- Bulb 6 (x=455, wire y=22) -->
+  <g transform="translate(455, 22) rotate(4)">
+    <line x1="0" y1="0" x2="0" y2="10" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="9" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="20" r="14" fill="url(#bRed)"/>
+    <path d="M-3.5 14 C-4.5 19, -2.5 25, 0 25 C2.5 25, 4.5 19, 3.5 14 Z" fill="#ff4d6d"/>
+  </g>
+
+  <!-- Bulb 7 (x=512, wire y=26 — closer pair) -->
+  <g transform="translate(512, 26) rotate(-7)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="5" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="16" r="14" fill="url(#bCyan)"/>
+    <path d="M-3.5 10 C-4.5 15, -2.5 21, 0 21 C2.5 21, 4.5 15, 3.5 10 Z" fill="#72efdd"/>
+  </g>
+
+  <!-- Bulb 8 (x=615, wire y=23) -->
+  <g transform="translate(615, 23) rotate(5)">
+    <line x1="0" y1="0" x2="0" y2="8" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="7" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="18" r="14" fill="url(#bGreen)"/>
+    <path d="M-3.5 12 C-4.5 17, -2.5 23, 0 23 C2.5 23, 4.5 17, 3.5 12 Z" fill="#06d6a0"/>
+  </g>
+
+  <!-- Bulb 9 (x=725, wire y=10) -->
+  <g transform="translate(725, 10) rotate(-4)">
+    <line x1="0" y1="0" x2="0" y2="7" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="6" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="17" r="14" fill="url(#bGold)"/>
+    <path d="M-3.5 11 C-4.5 16, -2.5 22, 0 22 C2.5 22, 4.5 16, 3.5 11 Z" fill="#ffd166"/>
+  </g>
+
+  <!-- Bulb 10 (x=785, wire y=11 — close pair near crest) -->
+  <g transform="translate(785, 11) rotate(6)">
+    <line x1="0" y1="0" x2="0" y2="9" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="8" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="19" r="14" fill="url(#bRed)"/>
+    <path d="M-3.5 13 C-4.5 18, -2.5 24, 0 24 C2.5 24, 4.5 18, 3.5 13 Z" fill="#ff4d6d"/>
+  </g>
+
+  <!-- Bulb 11 (x=895, wire y=23) -->
+  <g transform="translate(895, 23) rotate(-6)">
+    <line x1="0" y1="0" x2="0" y2="7" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="6" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="17" r="14" fill="url(#bCyan)"/>
+    <path d="M-3.5 11 C-4.5 16, -2.5 22, 0 22 C2.5 22, 4.5 16, 3.5 11 Z" fill="#72efdd"/>
+  </g>
+
+  <!-- Bulb 12 (x=968, wire y=26) -->
+  <g transform="translate(968, 26) rotate(4)">
+    <line x1="0" y1="0" x2="0" y2="10" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="9" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="20" r="14" fill="url(#bGold)"/>
+    <path d="M-3.5 14 C-4.5 19, -2.5 25, 0 25 C2.5 25, 4.5 19, 3.5 14 Z" fill="#ffd166"/>
+  </g>
+
+  <!-- Bulb 13 (x=1075, wire y=19 — wider gap) -->
+  <g transform="translate(1075, 19) rotate(-5)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="5" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="16" r="14" fill="url(#bGreen)"/>
+    <path d="M-3.5 10 C-4.5 15, -2.5 21, 0 21 C2.5 21, 4.5 15, 3.5 10 Z" fill="#06d6a0"/>
+  </g>
+
+  <!-- Bulb 14 (x=1142, wire y=11) -->
+  <g transform="translate(1142, 11) rotate(7)">
+    <line x1="0" y1="0" x2="0" y2="8" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="7" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="18" r="14" fill="url(#bRed)"/>
+    <path d="M-3.5 12 C-4.5 17, -2.5 23, 0 23 C2.5 23, 4.5 17, 3.5 12 Z" fill="#ff4d6d"/>
+  </g>
+
+  <!-- Bulb 15 (x=1255, wire y=21) -->
+  <g transform="translate(1255, 21) rotate(-6)">
+    <line x1="0" y1="0" x2="0" y2="9" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="8" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="19" r="14" fill="url(#bGold)"/>
+    <path d="M-3.5 13 C-4.5 18, -2.5 24, 0 24 C2.5 24, 4.5 18, 3.5 13 Z" fill="#ffd166"/>
+  </g>
+
+  <!-- Bulb 16 (x=1315, wire y=21 — closer cluster) -->
+  <g transform="translate(1315, 21) rotate(5)">
+    <line x1="0" y1="0" x2="0" y2="6" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="5" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="16" r="14" fill="url(#bCyan)"/>
+    <path d="M-3.5 10 C-4.5 15, -2.5 21, 0 21 C2.5 21, 4.5 15, 3.5 10 Z" fill="#72efdd"/>
+  </g>
+
+  <!-- Bulb 17 (x=1398, wire y=11) -->
+  <g transform="translate(1398, 11) rotate(-4)">
+    <line x1="0" y1="0" x2="0" y2="8" stroke="#475569" stroke-width="1.2"/>
+    <rect x="-2.2" y="7" width="4.4" height="4.5" rx="1" fill="#334155"/>
+    <circle cx="0" cy="18" r="14" fill="url(#bRed)"/>
+    <path d="M-3.5 12 C-4.5 17, -2.5 23, 0 23 C2.5 23, 4.5 17, 3.5 12 Z" fill="#ff4d6d"/>
+  </g>
+</svg>
 
 <!-- Background Snow Drift Layer (Behind Trees) -->
 <svg class="snow-ground-back" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
@@ -227,10 +380,8 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     </radialGradient>
   </defs>
 
-  <!-- Tree Trunk -->
   <rect x="128" y="282" width="24" height="46" rx="3" fill="#2b1d14"/>
 
-  <!-- Lower Boughs -->
   <path d="M140 195 L32 292 Q75 286 105 294 Q140 284 175 294 Q205 286 248 292 Z" fill="url(#pineDark)"/>
   <path d="M32 292 Q52 282 70 289 Q50 288 32 292 Z M248 292 Q228 282 210 289 Q230 288 248 292 Z" fill="#e2e8f0" opacity=".78"/>
 
@@ -251,7 +402,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   <circle cx="94" cy="236" r="6" fill="#eab308"/><circle cx="92" cy="234" r="1.6" fill="rgba(255,255,255,.55)"/>
   <circle cx="192" cy="234" r="6" fill="#dc2626"/><circle cx="190" cy="232" r="1.6" fill="rgba(255,255,255,.55)"/>
 
-  <!-- Upper Boughs + Star (Bends more flexibly in the wind) -->
   <g id="treeLeftTop" class="tree-upper">
     <path d="M140 110 L62 196 Q96 190 118 198 Q140 189 162 198 Q184 190 218 196 Z" fill="url(#pineDark)"/>
     <path d="M62 196 Q82 187 98 193 Q78 193 62 196 Z M218 196 Q198 187 182 193 Q202 193 218 196 Z" fill="#f1f5f9" opacity=".84"/>
@@ -325,7 +475,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   </g>
 </svg>
 
-<!-- Foreground Snowbank Layer (Covers Base of Trees & Gifts so They Sit Naturally in Snow) -->
+<!-- Foreground Snowbank Layer -->
 <svg class="snow-ground-front" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
   <defs>
     <linearGradient id="snowHillFront" x1="720" y1="0" x2="720" y2="80" gradientUnits="userSpaceOnUse">
@@ -342,17 +492,20 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 <div class="wrap">
   <main>
     <div class="logo-wrap">
-      <svg id="santaHat" class="santa-hat" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="hatRed" x1="14" y1="14" x2="46" y2="44" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#dc2626"/>
-            <stop offset="100%" stop-color="#7f1d1d"/>
-          </linearGradient>
-        </defs>
-        <path d="M14 44C16 24 30 12 48 14C43 24 44 34 48 44H14Z" fill="url(#hatRed)"/>
-        <circle cx="51" cy="15" r="6" fill="#f1f5f9"/>
-        <rect x="10" y="41" width="42" height="10" rx="5" fill="#f1f5f9"/>
-      </svg>
+      <!-- Santa Hat Drops Onto Top of 'M' Only After 'MS' Finishes Forming -->
+      <div class="hat-anchor">
+        <svg id="santaHat" class="santa-hat" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hatRed" x1="14" y1="14" x2="46" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#dc2626"/>
+              <stop offset="100%" stop-color="#7f1d1d"/>
+            </linearGradient>
+          </defs>
+          <path d="M14 44C16 24 30 12 48 14C43 24 44 34 48 44H14Z" fill="url(#hatRed)"/>
+          <circle cx="51" cy="15" r="6" fill="#f1f5f9"/>
+          <rect x="10" y="41" width="42" height="10" rx="5" fill="#f1f5f9"/>
+        </svg>
+      </div>
       <img class="logo" src="ms-logo.gif" alt="Maneesha Sathsara logo" width="144" height="90">
     </div>
 
@@ -429,7 +582,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   window.addEventListener('resize', resize);
   resize();
 
-  /* Multi-depth snowflakes + low-lying blowing snow spindrift */
   var totalFlakes = Math.min(145, Math.max(65, Math.floor(w / 8)));
   for(var i = 0; i < totalFlakes; i++){
     var depth = Math.random();
@@ -446,7 +598,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     });
   }
 
-  /* Subtle atmospheric wind mist streaks */
   var streakCount = Math.min(14, Math.max(6, Math.floor(w / 110)));
   for(var j = 0; j < streakCount; j++){
     windStreaks.push({
@@ -467,16 +618,14 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
     ctx.clearRect(0, 0, w, h);
 
-    /* Realistic organic wind wave (gentle breeze + periodic stronger gusts) */
     var gust =
       1.35 +
       Math.sin(t * 0.55) * 0.85 +
       Math.sin(t * 1.35 + 1.2) * 0.45 +
       Math.sin(t * 2.6) * 0.18;
-    // Always has a noticeable breeze, peaking during gusts
     var windSpeed = Math.max(0.45, gust);
 
-    /* 1. Sway Christmas Trees & Santa Hat in Sync with the Wind */
+    /* Sway Christmas Trees & Santa Hat in Sync with the Wind */
     var baseSway = windSpeed * 2.4 + Math.sin(t * 2.2) * 0.65;
     var topSway = windSpeed * 1.6 + Math.cos(t * 2.8) * 0.7;
 
@@ -497,7 +646,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       santaHat.style.transform = 'rotate(' + (-16 + windSpeed * 2.2).toFixed(1) + 'deg)';
     }
 
-    /* 2. Draw Subtle Wind Mist Streaks During Gusts */
+    /* Draw Subtle Wind Mist Streaks During Gusts */
     var gustIntensity = Math.max(0, (windSpeed - 1.1) / 1.7);
     if(gustIntensity > 0.05){
       ctx.lineCap = 'round';
@@ -522,7 +671,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       }
     }
 
-    /* 3. Draw Wind-Blown Snowflakes */
+    /* Draw Wind-Blown Snowflakes */
     for(var i = 0; i < flakes.length; i++){
       var f = flakes[i];
       ctx.beginPath();
