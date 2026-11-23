@@ -22,19 +22,44 @@
   --body:"DM Sans","Segoe UI",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;overflow-x:hidden}
-.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:32px 24px 36px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
-.logo{display:block;width:clamp(104px,12vw,144px);height:auto;margin-bottom:14px}
+body{background:radial-gradient(circle at 50% 0%, #0f172a 0%, var(--bg) 65%);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+/* Falling Snow Canvas */
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+/* Top Christmas Fairy Lights */
+.lights{position:fixed;top:-4px;left:0;width:100%;display:flex;justify-content:space-around;pointer-events:none;z-index:2;padding:0 12px;border-top:1px solid rgba(242,245,251,.12)}
+.bulb{position:relative;width:9px;height:13px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;margin-top:5px;animation:twinkle 2.4s infinite ease-in-out alternate}
+.bulb::before{content:"";position:absolute;top:-5px;left:2.5px;width:4px;height:5px;background:#2b3245;border-radius:1px}
+.bulb:nth-child(4n+1){background:#ffd166;box-shadow:0 0 12px 2px rgba(255,209,102,.65);animation-delay:0s}
+.bulb:nth-child(4n+2){background:#ff4d6d;box-shadow:0 0 12px 2px rgba(255,77,109,.65);animation-delay:.6s}
+.bulb:nth-child(4n+3){background:#06d6a0;box-shadow:0 0 12px 2px rgba(6,214,160,.6);animation-delay:1.2s}
+.bulb:nth-child(4n+4){background:#72efdd;box-shadow:0 0 12px 2px rgba(114,239,221,.6);animation-delay:1.8s}
+@keyframes twinkle{
+  0%{opacity:.4;transform:scale(.92)}
+  100%{opacity:1;transform:scale(1.06)}
+}
+
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:44px 24px 36px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* Logo + Santa Hat */
+.logo-wrap{position:relative;display:inline-block;margin-bottom:14px}
+.logo{display:block;width:clamp(104px,12vw,144px);height:auto}
+.santa-hat{position:absolute;top:-18px;left:-14px;width:46px;height:46px;transform:rotate(-22deg);pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45))}
+
 main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
 .rise{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
-.chip{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);padding:7px 16px;border-radius:999px;border:1px solid var(--line);margin-bottom:26px}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 0 rgba(242,245,251,.5);animation:pulse 2s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(242,245,251,0)}100%{box-shadow:0 0 0 0 rgba(242,245,251,0)}}
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(242,245,251,.03);margin-bottom:26px}
+.dot{width:8px;height:8px;border-radius:50%;background:#ff4d6d;box-shadow:0 0 0 0 rgba(255,77,109,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(255,77,109,0)}100%{box-shadow:0 0 0 0 rgba(255,77,109,0)}}
 h1{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,7vw,5rem);line-height:1.06;letter-spacing:-.015em;font-variant-ligatures:none}
 h1 span{display:block;color:var(--muted)}
+
+/* Countdown with Frosted Snow Rim */
 .clock{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;width:100%;max-width:560px}
-.unit{padding:20px 8px 14px;border-radius:18px;background:rgba(242,245,251,.04);border:1px solid var(--line)}
+.unit{position:relative;padding:20px 8px 14px;border-radius:18px;background:rgba(242,245,251,.04);border:1px solid var(--line);backdrop-filter:blur(4px)}
+.unit::before{content:"";position:absolute;top:-1px;left:12%;right:12%;height:3px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(242,245,251,.8),transparent);box-shadow:0 2px 10px rgba(242,245,251,.35)}
 .unit b{display:block;font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
 .unit span{display:block;margin-top:8px;color:var(--muted);font-size:.85rem}
 .when{margin-top:22px;color:var(--muted);font-size:1rem}
@@ -47,16 +72,43 @@ footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;color:va
 footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .2s}
 footer a:hover{border-color:var(--ink)}
 a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
-@media (max-width:480px){.clock{gap:8px}.unit{padding:14px 4px 10px}}
-@media (prefers-reduced-motion:reduce){.dot{animation:none}.rise{animation:none;opacity:1;transform:none}}
+@media (max-width:480px){
+  .clock{gap:8px}
+  .unit{padding:14px 4px 10px}
+  .santa-hat{width:38px;height:38px;top:-14px;left:-10px}
+  .bulb:nth-child(even){display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .dot,.bulb{animation:none}
+  .rise{animation:none;opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
+<canvas id="snow" aria-hidden="true"></canvas>
 
+<!-- String of Christmas Lights -->
+<div class="lights" aria-hidden="true">
+  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+</div>
+
+<div class="wrap">
   <main>
-    <img class="logo" src="ms-logo.gif" alt="Maneesha Sathsara logo" width="144" height="90">
-    <div class="chip rise"><i class="dot" aria-hidden="true"></i>Under maintenance</div>
+    <div class="logo-wrap">
+      <!-- Crisp SVG Santa Hat -->
+      <svg class="santa-hat" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <path d="M14 44C16 24 30 12 48 14C43 24 44 34 48 44H14Z" fill="#e63946"/>
+        <path d="M32 14C39 13 44 13.5 48 14C44 21 44 29 46 37C39 30 35 21 32 14Z" fill="#c1121f"/>
+        <circle cx="51" cy="15" r="6" fill="#f8fafc"/>
+        <rect x="10" y="41" width="42" height="10" rx="5" fill="#f8fafc"/>
+      </svg>
+      <img class="logo" src="ms-logo.gif" alt="Maneesha Sathsara logo" width="144" height="90">
+    </div>
+
+    <div class="chip rise"><i class="dot" aria-hidden="true"></i>Season’s greetings · Under maintenance</div>
     <h1 class="rise">My new portfolio <span>is coming soon.</span></h1>
     <div class="clock rise" style="animation-delay:.15s" role="timer" aria-label="Time until launch">
       <div class="unit"><b id="d">00</b><span>days</span></div>
@@ -103,6 +155,54 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     $('m').textContent = pad(Math.floor(s%3600/60)); $('s').textContent = pad(s%60);
   }
   tick(); setInterval(tick, 1000);
+
+  /* falling snow */
+  var canvas = $('snow');
+  var ctx = canvas.getContext('2d');
+  var flakes = [];
+  var w, h;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  var count = Math.min(85, Math.floor(w / 15));
+  for(var i = 0; i < count; i++){
+    flakes.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2.6 + 1.1,
+      speed: Math.random() * 0.9 + 0.35,
+      drift: Math.random() * Math.PI * 2,
+      opacity: Math.random() * 0.55 + 0.25
+    });
+  }
+
+  function drawSnow(){
+    ctx.clearRect(0, 0, w, h);
+    for(var i = 0; i < flakes.length; i++){
+      var f = flakes[i];
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(242, 245, 251, ' + f.opacity + ')';
+      ctx.fill();
+
+      if(!reducedMotion){
+        f.y += f.speed;
+        f.drift += 0.015;
+        f.x += Math.sin(f.drift) * 0.45;
+        if(f.y > h + 5){ f.y = -5; f.x = Math.random() * w; }
+        if(f.x > w + 5) f.x = -5;
+        if(f.x < -5) f.x = w + 5;
+      }
+    }
+    if(!reducedMotion) requestAnimationFrame(drawSnow);
+  }
+  drawSnow();
 })();
 </script>
 </body>
