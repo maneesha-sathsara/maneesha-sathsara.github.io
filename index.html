@@ -17,90 +17,107 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070a12; --ink:#f2f5fb; --muted:rgba(242,245,251,.6); --line:rgba(242,245,251,.14);
+  --bg:#070a12; --ink:#f2f5fb; --muted:rgba(242,245,251,.62); --line:rgba(242,245,251,.14);
   --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
   --body:"DM Sans","Segoe UI",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;overflow-x:hidden;position:relative}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;overflow-x:hidden}
 
-/* Subtle festive glow behind countdown only (keeps logo background pure #070a12) */
-body::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 50% 62%, rgba(230,57,70,.08) 0%, rgba(15,23,42,.25) 35%, transparent 70%);pointer-events:none;z-index:0}
-
-/* Falling Snow Canvas */
-#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
-
-/* Top Christmas Fairy Lights */
-.lights{position:fixed;top:-4px;left:0;width:100%;display:flex;justify-content:space-around;pointer-events:none;z-index:4;padding:0 12px;border-top:1px solid rgba(242,245,251,.14)}
-.bulb{position:relative;width:9px;height:13px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;margin-top:5px;animation:twinkle 2.4s infinite ease-in-out alternate}
-.bulb::before{content:"";position:absolute;top:-5px;left:2.5px;width:4px;height:5px;background:#2b3245;border-radius:1px}
-.bulb:nth-child(4n+1){background:#ffd166;box-shadow:0 0 12px 2px rgba(255,209,102,.7);animation-delay:0s}
-.bulb:nth-child(4n+2){background:#ff4d6d;box-shadow:0 0 12px 2px rgba(255,77,109,.7);animation-delay:.6s}
-.bulb:nth-child(4n+3){background:#06d6a0;box-shadow:0 0 12px 2px rgba(6,214,160,.65);animation-delay:1.2s}
-.bulb:nth-child(4n+4){background:#72efdd;box-shadow:0 0 12px 2px rgba(114,239,221,.65);animation-delay:1.8s}
-@keyframes twinkle{
-  0%{opacity:.4;transform:scale(.92)}
-  100%{opacity:1;transform:scale(1.06)}
+/* Subtle natural winter moonlight & horizon atmosphere */
+body{
+  background:
+    radial-gradient(ellipse 75% 45% at 50% -8%, rgba(36, 62, 108, .32) 0%, transparent 70%),
+    radial-gradient(ellipse 90% 25% at 50% 102%, rgba(200, 220, 255, .07) 0%, transparent 75%),
+    #070a12;
 }
 
-/* Hanging Geddi (Ornaments / Baubles) */
-.ornaments{position:fixed;top:0;left:0;width:100%;pointer-events:none;z-index:3}
-.ornament{position:absolute;top:0;display:flex;flex-direction:column;align-items:center;transform-origin:top center;animation:swing 4.5s ease-in-out infinite alternate}
-.ornament.o1{left:6%;animation-duration:4.8s}
-.ornament.o2{left:13%;animation-duration:3.9s;animation-delay:-1.2s}
-.ornament.o3{right:13%;animation-duration:4.2s;animation-delay:-2s}
-.ornament.o4{right:6%;animation-duration:5s;animation-delay:-.6s}
-.string{width:1.5px;background:linear-gradient(to bottom, rgba(242,245,251,.25), rgba(255,209,102,.6))}
-@keyframes swing{
-  0%{transform:rotate(-4deg)}
-  100%{transform:rotate(4deg)}
+/* Fullscreen Canvas for Multi-Layer Snow + Santa Stardust Trail */
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
+
+/* Delicate Warm Fairy Light Garland at Top */
+.garland{position:fixed;top:0;left:0;width:100%;height:34px;pointer-events:none;z-index:2;opacity:.9}
+.g-bulb{animation:breath 3.2s infinite ease-in-out alternate}
+.g-bulb:nth-child(2n){animation-delay:.8s}
+.g-bulb:nth-child(3n){animation-delay:1.6s}
+@keyframes breath{
+  0%{opacity:.45}
+  100%{opacity:1}
 }
 
-/* Flying Santa Claus & Sleigh */
-.santa-fly{position:fixed;top:12%;left:-280px;width:230px;pointer-events:none;z-index:1;opacity:.85;animation:flyAcross 24s linear infinite;animation-delay:1s;filter:drop-shadow(0 6px 14px rgba(255,209,102,.2))}
-@keyframes flyAcross{
-  0%{transform:translate3d(0, 12px, 0) rotate(-3deg)}
-  25%{transform:translate3d(32vw, -16px, 0) rotate(2deg)}
-  50%{transform:translate3d(65vw, 8px, 0) rotate(-2deg)}
-  75%{transform:translate3d(98vw, -14px, 0) rotate(2deg)}
-  100%{transform:translate3d(calc(100vw + 320px), 6px, 0) rotate(-2deg)}
+/* Realistic Snow-Dusted Pine Trees at Bottom Corners */
+.tree-left{position:fixed;bottom:-4px;left:1vw;width:clamp(165px, 21vw, 270px);pointer-events:none;z-index:2;filter:drop-shadow(0 10px 25px rgba(0,0,0,.75))}
+.tree-right{position:fixed;bottom:-4px;right:1.5vw;width:clamp(115px, 14vw, 185px);pointer-events:none;z-index:2;filter:drop-shadow(0 10px 25px rgba(0,0,0,.75))}
+.tree-light{animation:treeTwinkle 2.6s infinite ease-in-out alternate}
+.tree-light:nth-child(2n){animation-delay:.7s}
+.tree-light:nth-child(3n){animation-delay:1.4s}
+@keyframes treeTwinkle{
+  0%{opacity:.35;transform:scale(.88)}
+  100%{opacity:1;transform:scale(1.08)}
 }
 
-.wrap{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:44px 24px 32px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
+/* Flying Santa Claus & Reindeer Sleigh (JS drives full perimeter orbit) */
+#santaSleigh{
+  position:fixed;top:0;left:0;width:190px;pointer-events:none;z-index:3;
+  will-change:transform;
+  filter:drop-shadow(0 6px 16px rgba(255, 214, 102, .25));
+}
+.leg-f{transform-origin:top center;animation:gallopF .42s infinite ease-in-out alternate}
+.leg-b{transform-origin:top center;animation:gallopB .42s infinite ease-in-out alternate}
+@keyframes gallopF{0%{transform:rotate(-24deg)}100%{transform:rotate(26deg)}}
+@keyframes gallopB{0%{transform:rotate(24deg)}100%{transform:rotate(-24deg)}}
 
-/* Logo without rectangle + Santa Hat right on the 'M' */
+/* IMPORTANT: No z-index on .wrap so mix-blend-mode:screen blends directly with body & erases the black box! */
+.wrap{position:relative;max-width:900px;margin:0 auto;padding:44px 24px 32px;min-height:100vh;display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* Logo with Black Box Removed + Natural Felt Santa Hat on 'M' */
 .logo-wrap{position:relative;display:inline-block;margin-bottom:14px}
-.logo{display:block;width:clamp(116px,13vw,154px);height:auto;mix-blend-mode:lighten}
-.santa-hat{position:absolute;top:-3%;left:10.5%;width:24%;height:auto;transform:rotate(-15deg);pointer-events:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6));z-index:2}
+.logo{
+  display:block;width:clamp(118px,13vw,156px);height:auto;
+  mix-blend-mode:screen;
+  filter:brightness(1.08) contrast(1.16);
+}
+.santa-hat{
+  position:absolute;top:-4%;left:10%;width:24%;height:auto;
+  transform:rotate(-16deg);pointer-events:none;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.75));
+}
 
 main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
 .rise{opacity:0;transform:translateY(16px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
-.chip{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(242,245,251,.03);margin-bottom:24px}
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted);padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(12,17,30,.55);backdrop-filter:blur(8px);margin-bottom:24px}
 .dot{width:8px;height:8px;border-radius:50%;background:#ff4d6d;box-shadow:0 0 0 0 rgba(255,77,109,.6);animation:pulse 2s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(255,77,109,0)}100%{box-shadow:0 0 0 0 rgba(255,77,109,0)}}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2.5rem,6.8vw,4.8rem);line-height:1.06;letter-spacing:-.015em;font-variant-ligatures:none}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.5rem,6.8vw,4.8rem);line-height:1.06;letter-spacing:-.015em;font-variant-ligatures:none;text-shadow:0 8px 30px rgba(0,0,0,.6)}
 h1 span{display:block;color:var(--muted)}
 
-/* Countdown with Frosted Snow Rim */
-.clock{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px;width:100%;max-width:560px}
-.unit{position:relative;padding:20px 8px 14px;border-radius:18px;background:rgba(242,245,251,.04);border:1px solid var(--line);backdrop-filter:blur(4px)}
-.unit::before{content:"";position:absolute;top:-1px;left:12%;right:12%;height:3px;border-radius:999px;background:linear-gradient(90deg,transparent,rgba(242,245,251,.85),transparent);box-shadow:0 2px 10px rgba(242,245,251,.35)}
+/* Countdown Cards with Natural Frost & Snow Accumulation */
+.clock{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;width:100%;max-width:560px}
+.unit{
+  position:relative;padding:20px 8px 14px;border-radius:18px;
+  background:rgba(15, 22, 38, .55);
+  border:1px solid rgba(242,245,251,.15);
+  backdrop-filter:blur(10px);
+  box-shadow:0 12px 32px rgba(0,0,0,.35);
+}
+/* Natural soft snow crest resting on top of each box */
+.unit::before{
+  content:"";position:absolute;top:-2px;left:10%;right:10%;height:4px;
+  border-radius:999px;
+  background:linear-gradient(90deg, transparent, rgba(235,244,255,.85) 25%, rgba(255,255,255,.95) 50%, rgba(235,244,255,.85) 75%, transparent);
+  filter:blur(.4px);
+}
 .unit b{display:block;font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
 .unit span{display:block;margin-top:8px;color:var(--muted);font-size:.85rem}
-.when{margin-top:20px;color:var(--muted);font-size:1rem}
-
-/* X-mas Gifts Cluster */
-.gifts{margin-top:24px;margin-bottom:10px;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1);display:inline-flex;align-items:flex-end;justify-content:center}
-.gifts:hover{transform:translateY(-4px) scale(1.04)}
-.gifts:active{transform:scale(.97)}
+.when{margin-top:22px;color:var(--muted);font-size:1rem}
 
 .live{display:none}
 .live p{font-family:var(--display);font-size:1.8rem;font-weight:600;margin-bottom:18px}
 .btn{display:inline-block;padding:13px 26px;border-radius:12px;font-weight:500;color:var(--bg);text-decoration:none;background:var(--ink)}
 body.launched .clock,body.launched .when,body.launched .chip,body.launched h1{display:none}
 body.launched .live{display:block}
-footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;color:var(--muted);font-size:.95rem;padding-top:8px}
+footer{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;color:var(--muted);font-size:.95rem;padding-top:14px}
 footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .2s}
 footer a:hover{border-color:var(--ink)}
 a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
@@ -108,160 +125,232 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 @media (max-width:640px){
   .clock{gap:8px}
   .unit{padding:14px 4px 10px}
-  .ornament.o2,.ornament.o3{display:none}
-  .ornament.o1{left:4%}
-  .ornament.o4{right:4%}
-  .bulb:nth-child(even){display:none}
-  .santa-fly{width:170px;top:15%}
+  .tree-left{width:125px;left:-10px;opacity:.9}
+  .tree-right{width:95px;right:-10px;opacity:.85}
+  #santaSleigh{width:135px}
 }
 @media (prefers-reduced-motion:reduce){
-  .dot,.bulb,.ornament,.santa-fly{animation:none}
-  .santa-fly{display:none}
+  .dot,.g-bulb,.tree-light,.leg-f,.leg-b{animation:none}
+  #santaSleigh{display:none}
   .rise{animation:none;opacity:1;transform:none}
 }
 </style>
 </head>
 <body>
-<canvas id="snow" aria-hidden="true"></canvas>
 
-<!-- Top Christmas Fairy Lights -->
-<div class="lights" aria-hidden="true">
-  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
-  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
-  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
-  <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
-</div>
+<!-- Canvas for Multi-Depth Natural Snowfall & Santa's Golden Stardust Trail -->
+<canvas id="fx" aria-hidden="true"></canvas>
 
-<!-- Hanging Geddi (Christmas Ornaments) -->
-<div class="ornaments" aria-hidden="true">
-  <!-- Left Red Bauble -->
-  <div class="ornament o1">
-    <div class="string" style="height:56px"></div>
-    <svg width="32" height="38" viewBox="0 0 32 38" fill="none">
-      <rect x="12" y="1" width="8" height="5" rx="1.5" fill="#ffd166"/>
-      <circle cx="16" cy="21" r="14" fill="url(#redBall)"/>
-      <path d="M4 18C10 22 22 22 28 18" stroke="#ffd166" stroke-width="1.6" stroke-dasharray="2 2"/>
-      <circle cx="11" cy="15" r="3" fill="rgba(255,255,255,.35)"/>
-      <defs>
-        <radialGradient id="redBall" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11 14) rotate(45) scale(24)">
-          <stop stop-color="#ff6b81"/>
-          <stop offset=".6" stop-color="#e63946"/>
-          <stop offset="1" stop-color="#800f2f"/>
-        </radialGradient>
-      </defs>
-    </svg>
-  </div>
+<!-- Delicate Warm Fairy Light Wire Along Top -->
+<svg class="garland" viewBox="0 0 1440 36" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <radialGradient id="warmGlow">
+      <stop offset="0%" stop-color="#fff3b0" stop-opacity="1"/>
+      <stop offset="45%" stop-color="#ffd166" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rubyGlow">
+      <stop offset="0%" stop-color="#ffccd5" stop-opacity="1"/>
+      <stop offset="45%" stop-color="#ff4d6d" stop-opacity=".45"/>
+      <stop offset="100%" stop-color="#ff4d6d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path d="M0 2 Q 180 22, 360 4 T 720 4 T 1080 4 T 1440 2" stroke="rgba(242,245,251,.16)" stroke-width="1" fill="none"/>
+  <g class="g-bulb"><circle cx="90" cy="11" r="9" fill="url(#warmGlow)"/><circle cx="90" cy="11" r="2.2" fill="#fff8d6"/></g>
+  <g class="g-bulb"><circle cx="180" cy="13" r="9" fill="url(#rubyGlow)"/><circle cx="180" cy="13" r="2.2" fill="#ffe5ec"/></g>
+  <g class="g-bulb"><circle cx="270" cy="10" r="9" fill="url(#warmGlow)"/><circle cx="270" cy="10" r="2.2" fill="#fff8d6"/></g>
+  <g class="g-bulb"><circle cx="450" cy="10" r="9" fill="url(#warmGlow)"/><circle cx="450" cy="10" r="2.2" fill="#fff8d6"/></g>
+  <g class="g-bulb"><circle cx="540" cy="13" r="9" fill="url(#rubyGlow)"/><circle cx="540" cy="13" r="2.2" fill="#ffe5ec"/></g>
+  <g class="g-bulb"><circle cx="630" cy="10" r="9" fill="url(#warmGlow)"/><circle cx="630" cy="10" r="2.2" fill="#fff8d6"/></g>
+  <g class="g-bulb"><circle cx="810" cy="10" r="9" fill="url(#warmGlow)"/><circle cx="810" cy="10" r="2.2" fill="#fff8d6"/></g>
+  <g class="g-bulb"><circle cx="900" cy="13" r="9" fill="url(#rubyGlow)"/><circle cx="900" cy="13" r="2.2" fill="#ffe5ec"/></g>
+  <g class="g-bulb"><circle cx="990" cy="10" r="9" fill="url(#warmGlow)"/><circle cx="990" cy="10" r="2.2" fill="#fff8d6"/></g>
+  <g class="g-bulb"><circle cx="1170" cy="10" r="9" fill="url(#warmGlow)"/><circle cx="1170" cy="10" r="2.2" fill="#fff8d6"/></g>
+  <g class="g-bulb"><circle cx="1260" cy="13" r="9" fill="url(#rubyGlow)"/><circle cx="1260" cy="13" r="2.2" fill="#ffe5ec"/></g>
+  <g class="g-bulb"><circle cx="1350" cy="10" r="9" fill="url(#warmGlow)"/><circle cx="1350" cy="10" r="2.2" fill="#fff8d6"/></g>
+</svg>
 
-  <!-- Left Gold Bauble -->
-  <div class="ornament o2">
-    <div class="string" style="height:32px"></div>
-    <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
-      <rect x="9" y="1" width="6" height="4" rx="1" fill="#f8fafc"/>
-      <circle cx="12" cy="17" r="10.5" fill="url(#goldBall)"/>
-      <circle cx="8.5" cy="13" r="2.2" fill="rgba(255,255,255,.45)"/>
-      <defs>
-        <radialGradient id="goldBall" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(8 12) rotate(45) scale(18)">
-          <stop stop-color="#ffe699"/>
-          <stop offset=".65" stop-color="#f4a261"/>
-          <stop offset="1" stop-color="#9c6644"/>
-        </radialGradient>
-      </defs>
-    </svg>
-  </div>
+<!-- Realistic Snow-Dusted Pine Christmas Tree + Wrapped Gifts (Bottom-Left) -->
+<svg class="tree-left" viewBox="0 0 280 340" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="pineDark" x1="140" y1="30" x2="140" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1b4d3e"/>
+      <stop offset="100%" stop-color="#091f18"/>
+    </linearGradient>
+    <linearGradient id="pineMid" x1="140" y1="30" x2="140" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#286b54"/>
+      <stop offset="100%" stop-color="#0f3327"/>
+    </linearGradient>
+    <radialGradient id="starHalo">
+      <stop offset="0%" stop-color="#fff3b0" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffd166" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="snowGround">
+      <stop offset="0%" stop-color="#dbeafe" stop-opacity=".26"/>
+      <stop offset="70%" stop-color="#93c5fd" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#070a12" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
 
-  <!-- Right Emerald Bauble -->
-  <div class="ornament o3">
-    <div class="string" style="height:36px"></div>
-    <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
-      <rect x="9" y="1" width="6" height="4" rx="1" fill="#ffd166"/>
-      <circle cx="12" cy="17" r="10.5" fill="url(#greenBall)"/>
-      <circle cx="8.5" cy="13" r="2.2" fill="rgba(255,255,255,.4)"/>
-      <defs>
-        <radialGradient id="greenBall" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(8 12) rotate(45) scale(18)">
-          <stop stop-color="#52b788"/>
-          <stop offset=".65" stop-color="#2d6a4f"/>
-          <stop offset="1" stop-color="#1b4332"/>
-        </radialGradient>
-      </defs>
-    </svg>
-  </div>
+  <!-- Soft Snowbank Ground -->
+  <ellipse cx="140" cy="328" rx="135" ry="16" fill="url(#snowGround)"/>
 
-  <!-- Right Red & Gold Bauble -->
-  <div class="ornament o4">
-    <div class="string" style="height:64px"></div>
-    <svg width="32" height="38" viewBox="0 0 32 38" fill="none">
-      <rect x="12" y="1" width="8" height="5" rx="1.5" fill="#ffd166"/>
-      <circle cx="16" cy="21" r="14" fill="url(#redBall2)"/>
-      <path d="M5 24C11 20 21 20 27 24" stroke="#ffd166" stroke-width="1.6"/>
-      <circle cx="11" cy="15" r="3" fill="rgba(255,255,255,.35)"/>
-      <defs>
-        <radialGradient id="redBall2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11 14) rotate(45) scale(24)">
-          <stop stop-color="#ff6b81"/>
-          <stop offset=".6" stop-color="#d62828"/>
-          <stop offset="1" stop-color="#6a040f"/>
-        </radialGradient>
-      </defs>
-    </svg>
-  </div>
-</div>
+  <!-- Tree Trunk -->
+  <rect x="128" y="282" width="24" height="42" rx="3" fill="#2b1d14"/>
 
-<!-- Flying Santa Claus & Rudolph Sleigh -->
-<div class="santa-fly" aria-hidden="true">
-  <svg viewBox="0 0 260 80" fill="none">
-    <!-- Stardust Trail -->
-    <path d="M4 56 Q 45 48, 82 54" stroke="url(#trail)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 5"/>
-    <!-- Sleigh -->
-    <path d="M42 62 H108 C116 62, 120 55, 116 50" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M54 62 V55 M94 62 V55" stroke="#ffd166" stroke-width="2"/>
-    <path d="M48 40 C48 52, 56 55, 75 55 H102 C108 55, 112 46, 106 42 C98 46, 86 46, 78 40 Z" fill="#e63946"/>
-    <!-- Gift Sack in Sleigh -->
-    <circle cx="62" cy="39" r="9" fill="#b5179e"/>
-    <rect x="67" y="34" width="10" height="10" rx="1.5" fill="#06d6a0"/>
-    <!-- Santa Claus -->
-    <circle cx="86" cy="36" r="8" fill="#e63946"/>
-    <circle cx="88" cy="26" r="5" fill="#ffcdb2"/>
-    <!-- Santa Beard -->
-    <path d="M85 27 C86 33, 93 33, 94 27 Z" fill="#ffffff"/>
-    <!-- Santa Hat -->
-    <path d="M82 23 C84 16, 91 17, 93 23 Z" fill="#e63946"/>
-    <circle cx="81" cy="22" r="2.2" fill="#ffffff"/>
-    <!-- Reins -->
-    <path d="M93 34 Q 130 44, 178 36" stroke="rgba(255,209,102,.65)" stroke-width="1.2"/>
-    <!-- Reindeer 1 -->
-    <g transform="translate(145, 22)">
-      <ellipse cx="18" cy="22" rx="11" ry="6" fill="#bc6c25"/>
-      <circle cx="28" cy="14" r="4.5" fill="#bc6c25"/>
-      <path d="M27 10 L25 3 M29 10 L32 4" stroke="#dda15e" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M11 26 L7 36 M15 27 L14 37 M23 26 L27 36 M26 25 L31 35" stroke="#9c6644" stroke-width="2" stroke-linecap="round"/>
-    </g>
-    <!-- Rudolph (Lead Reindeer with Glowing Red Nose) -->
-    <g transform="translate(192, 18)">
-      <ellipse cx="18" cy="22" rx="11" ry="6" fill="#dda15e"/>
-      <circle cx="28" cy="14" r="4.5" fill="#dda15e"/>
-      <path d="M27 10 L25 3 M29 10 L32 4" stroke="#faedcd" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M11 26 L7 36 M15 27 L14 37 M23 26 L27 36 M26 25 L31 35" stroke="#bc6c25" stroke-width="2" stroke-linecap="round"/>
-      <!-- Glowing Nose -->
-      <circle cx="33.5" cy="14.5" r="2.6" fill="#ff2a55"/>
-      <circle cx="33.5" cy="14.5" r="6" fill="rgba(255,42,85,.45)"/>
-    </g>
+  <!-- Layered Evergreen Boughs (Bottom to Top) -->
+  <!-- Tier 5 (Bottom) -->
+  <path d="M140 195 L32 292 Q75 286 105 294 Q140 284 175 294 Q205 286 248 292 Z" fill="url(#pineDark)"/>
+  <path d="M32 292 Q52 282 70 289 Q50 288 32 292 Z M248 292 Q228 282 210 289 Q230 288 248 292 Z" fill="#e2e8f0" opacity=".75"/>
+
+  <!-- Tier 4 -->
+  <path d="M140 150 L46 244 Q85 238 112 246 Q140 236 168 246 Q195 238 234 244 Z" fill="url(#pineMid)"/>
+  <path d="M46 244 Q66 234 86 241 Q64 241 46 244 Z M234 244 Q214 234 194 241 Q216 241 234 244 Z" fill="#e2e8f0" opacity=".8"/>
+
+  <!-- Tier 3 -->
+  <path d="M140 110 L62 196 Q96 190 118 198 Q140 189 162 198 Q184 190 218 196 Z" fill="url(#pineDark)"/>
+  <path d="M62 196 Q82 187 98 193 Q78 193 62 196 Z M218 196 Q198 187 182 193 Q202 193 218 196 Z" fill="#f1f5f9" opacity=".82"/>
+
+  <!-- Tier 2 -->
+  <path d="M140 72 L80 148 Q106 143 124 150 Q140 142 156 150 Q174 143 200 148 Z" fill="url(#pineMid)"/>
+  <path d="M80 148 Q98 140 112 146 Q94 146 80 148 Z M200 148 Q182 140 168 146 Q186 146 200 148 Z" fill="#f1f5f9" opacity=".85"/>
+
+  <!-- Tier 1 (Top) -->
+  <path d="M140 36 L100 102 Q120 98 140 104 Q160 98 180 102 Z" fill="url(#pineDark)"/>
+  <path d="M140 36 L124 62 Q134 59 140 63 Q146 59 156 62 Z" fill="#f8fafc" opacity=".9"/>
+
+  <!-- Warm Fairy Light Garland Draped on Tree -->
+  <path d="M114 96 Q145 112 174 102 M92 142 Q142 166 192 148 M72 192 Q140 220 208 196 M52 242 Q140 274 226 244" stroke="rgba(255,214,102,.32)" stroke-width="1.2" fill="none"/>
+
+  <!-- Glowing Tree Fairy Lights -->
+  <g class="tree-light"><circle cx="122" cy="100" r="6" fill="url(#starHalo)"/><circle cx="122" cy="100" r="1.8" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="158" cy="105" r="6" fill="url(#starHalo)"/><circle cx="158" cy="105" r="1.8" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="105" cy="148" r="7" fill="url(#starHalo)"/><circle cx="105" cy="148" r="2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="145" cy="156" r="7" fill="url(#starHalo)"/><circle cx="145" cy="156" r="2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="180" cy="150" r="7" fill="url(#starHalo)"/><circle cx="180" cy="150" r="2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="88" cy="198" r="7" fill="url(#starHalo)"/><circle cx="88" cy="198" r="2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="132" cy="208" r="7" fill="url(#starHalo)"/><circle cx="132" cy="208" r="2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="176" cy="204" r="7" fill="url(#starHalo)"/><circle cx="176" cy="204" r="2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="72" cy="248" r="8" fill="url(#starHalo)"/><circle cx="72" cy="248" r="2.2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="118" cy="260" r="8" fill="url(#starHalo)"/><circle cx="118" cy="260" r="2.2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="164" cy="258" r="8" fill="url(#starHalo)"/><circle cx="164" cy="258" r="2.2" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="208" cy="248" r="8" fill="url(#starHalo)"/><circle cx="208" cy="248" r="2.2" fill="#fff8d6"/></g>
+
+  <!-- Glossy Christmas Ornaments (Geddi) -->
+  <circle cx="134" cy="126" r="5.5" fill="#b91c1c"/><circle cx="132.2" cy="124.2" r="1.5" fill="rgba(255,255,255,.55)"/>
+  <circle cx="162" cy="176" r="6" fill="#d97706"/><circle cx="160" cy="174" r="1.6" fill="rgba(255,255,255,.55)"/>
+  <circle cx="106" cy="182" r="5.5" fill="#dc2626"/><circle cx="104.2" cy="180.2" r="1.5" fill="rgba(255,255,255,.55)"/>
+  <circle cx="148" cy="232" r="6.5" fill="#b91c1c"/><circle cx="146" cy="230" r="1.8" fill="rgba(255,255,255,.55)"/>
+  <circle cx="94" cy="236" r="6" fill="#eab308"/><circle cx="92" cy="234" r="1.6" fill="rgba(255,255,255,.55)"/>
+  <circle cx="192" cy="234" r="6" fill="#dc2626"/><circle cx="190" cy="232" r="1.6" fill="rgba(255,255,255,.55)"/>
+
+  <!-- Glowing Tree Topper Star -->
+  <circle cx="140" cy="28" r="24" fill="url(#starHalo)"/>
+  <path d="M140 12 L144 23 L156 23 L146 30 L150 41 L140 34 L130 41 L134 30 L124 23 L136 23 Z" fill="#fef08a"/>
+
+  <!-- Realistic Wrapped Presents Under the Tree -->
+  <!-- Crimson Gift Box -->
+  <rect x="66" y="294" width="38" height="32" rx="3" fill="#991b1b"/>
+  <rect x="64" y="290" width="42" height="6" rx="1.5" fill="#b91c1c"/>
+  <rect x="82" y="290" width="6" height="36" fill="#fbbf24"/>
+  <path d="M85 290 C78 282, 72 286, 81 290 M85 290 C92 282, 98 286, 89 290" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Midnight Gold Gift Box -->
+  <rect x="172" y="298" width="34" height="28" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <rect x="170" y="294" width="38" height="5" rx="1.5" fill="#334155"/>
+  <rect x="186" y="294" width="5" height="32" fill="#e11d48"/>
+  <path d="M188.5 294 C182 287, 177 290, 185 294 M188.5 294 C195 287, 200 290, 192 294" stroke="#e11d48" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Small Emerald Gift Box -->
+  <rect x="108" y="304" width="26" height="22" rx="2.5" fill="#065f46"/>
+  <rect x="119" y="304" width="4" height="22" fill="#fde68a"/>
+</svg>
+
+<!-- Companion Snow-Dusted Pine Tree (Bottom-Right) -->
+<svg class="tree-right" viewBox="0 0 200 260" fill="none" aria-hidden="true">
+  <ellipse cx="100" cy="250" rx="92" ry="12" fill="url(#snowGround)"/>
+  <rect x="91" y="214" width="18" height="34" rx="2" fill="#2b1d14"/>
+  <path d="M100 142 L24 222 Q65 216 100 224 Q135 216 176 222 Z" fill="url(#pineDark)"/>
+  <path d="M24 222 Q42 214 58 219 Q40 219 24 222 Z M176 222 Q158 214 142 219 Q160 219 176 222 Z" fill="#e2e8f0" opacity=".78"/>
+  <path d="M100 96 L38 172 Q70 167 100 174 Q130 167 162 172 Z" fill="url(#pineMid)"/>
+  <path d="M38 172 Q54 164 68 169 Q52 169 38 172 Z M162 172 Q146 164 132 169 Q148 169 162 172 Z" fill="#f1f5f9" opacity=".82"/>
+  <path d="M100 50 L54 122 Q78 118 100 124 Q122 118 146 122 Z" fill="url(#pineDark)"/>
+  <path d="M100 50 L86 72 Q95 70 100 73 Q105 70 114 72 Z" fill="#f8fafc" opacity=".88"/>
+  <g class="tree-light"><circle cx="84" cy="112" r="6" fill="url(#starHalo)"/><circle cx="84" cy="112" r="1.7" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="116" cy="154" r="6" fill="url(#starHalo)"/><circle cx="116" cy="154" r="1.7" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="74" cy="198" r="6" fill="url(#starHalo)"/><circle cx="74" cy="198" r="1.7" fill="#fff8d6"/></g>
+  <g class="tree-light"><circle cx="128" cy="202" r="6" fill="url(#starHalo)"/><circle cx="128" cy="202" r="1.7" fill="#fff8d6"/></g>
+</svg>
+
+<!-- Detailed Santa Claus & Galloping Reindeer Sleigh (Flies All Around the Site) -->
+<div id="santaSleigh" aria-hidden="true">
+  <svg viewBox="0 0 280 90" fill="none">
     <defs>
-      <linearGradient id="trail" x1="4" y1="56" x2="82" y2="54" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#ffd166" stop-opacity="0"/>
-        <stop offset="1" stop-color="#ffd166" stop-opacity=".9"/>
-      </linearGradient>
+      <radialGradient id="rudolphNose">
+        <stop offset="0%" stop-color="#ff4d6d" stop-opacity="1"/>
+        <stop offset="45%" stop-color="#ff1e42" stop-opacity=".55"/>
+        <stop offset="100%" stop-color="#ff1e42" stop-opacity="0"/>
+      </radialGradient>
     </defs>
+    <!-- Sleigh Golden Runners -->
+    <path d="M24 68 H96 C106 68, 111 60, 106 54" stroke="#fbbf24" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M38 68 V60 M82 68 V60" stroke="#d97706" stroke-width="2"/>
+    <!-- Sleigh Body -->
+    <path d="M30 42 C30 56, 40 60, 62 60 H92 C99 60, 103 50, 96 45 C87 50, 74 50, 64 42 Z" fill="#991b1b"/>
+    <path d="M30 42 C42 47, 54 47, 64 42" stroke="#fbbf24" stroke-width="1.6"/>
+    <!-- Toy Sack & Gifts -->
+    <circle cx="46" cy="40" r="10" fill="#78350f"/>
+    <rect x="52" y="34" width="9" height="9" rx="1.5" fill="#059669"/>
+    <rect x="42" y="31" width="8" height="8" rx="1.5" fill="#d97706"/>
+    <!-- Santa Claus -->
+    <circle cx="72" cy="38" r="8.5" fill="#b91c1c"/>
+    <circle cx="75" cy="27" r="5" fill="#fed7aa"/>
+    <path d="M72 28 C73 35, 81 35, 82 28 Z" fill="#f8fafc"/>
+    <path d="M68 24 C70 16, 78 17, 80 24 Z" fill="#b91c1c"/>
+    <circle cx="67" cy="23" r="2.2" fill="#f8fafc"/>
+    <!-- Golden Reins -->
+    <path d="M80 36 Q 125 48, 222 36" stroke="rgba(251, 191, 36, .6)" stroke-width="1.1"/>
+
+    <!-- Rear Reindeer -->
+    <g transform="translate(148, 24)">
+      <ellipse cx="18" cy="22" rx="11.5" ry="6" fill="#78350f"/>
+      <path d="M24 19 L29 12" stroke="#78350f" stroke-width="5.5" stroke-linecap="round"/>
+      <circle cx="30" cy="11" r="4.5" fill="#92400e"/>
+      <path d="M29 7 L27 0 M31 7 L34 1" stroke="#d6d3d1" stroke-width="1.3" stroke-linecap="round"/>
+      <line class="leg-b" x1="10" y1="25" x2="6" y2="37" stroke="#5c280a" stroke-width="2.1" stroke-linecap="round"/>
+      <line class="leg-f" x1="25" y1="25" x2="30" y2="37" stroke="#5c280a" stroke-width="2.1" stroke-linecap="round"/>
+    </g>
+
+    <!-- Lead Reindeer (Rudolph) -->
+    <g transform="translate(202, 20)">
+      <ellipse cx="18" cy="22" rx="12" ry="6.2" fill="#92400e"/>
+      <path d="M24 19 L29 12" stroke="#92400e" stroke-width="5.5" stroke-linecap="round"/>
+      <circle cx="30" cy="11" r="4.6" fill="#b45309"/>
+      <path d="M29 7 L27 0 M31 7 L34 1" stroke="#e7e5e4" stroke-width="1.4" stroke-linecap="round"/>
+      <line class="leg-f" x1="10" y1="25" x2="5" y2="37" stroke="#78350f" stroke-width="2.2" stroke-linecap="round"/>
+      <line class="leg-b" x1="25" y1="25" x2="31" y2="37" stroke="#78350f" stroke-width="2.2" stroke-linecap="round"/>
+      <!-- Rudolph's Soft Glowing Nose -->
+      <circle cx="35.5" cy="11.5" r="9" fill="url(#rudolphNose)"/>
+      <circle cx="35.5" cy="11.5" r="2.3" fill="#ff2a55"/>
+    </g>
   </svg>
 </div>
 
 <div class="wrap">
   <main>
     <div class="logo-wrap">
-      <!-- Crisp SVG Santa Hat sitting right on the left peak of 'M' -->
+      <!-- Shaded Felt Santa Hat Perched Naturally on the 'M' -->
       <svg class="santa-hat" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M14 44C16 24 30 12 48 14C43 24 44 34 48 44H14Z" fill="#e63946"/>
-        <path d="M32 14C39 13 44 13.5 48 14C44 21 44 29 46 37C39 30 35 21 32 14Z" fill="#c1121f"/>
-        <circle cx="51" cy="15" r="6" fill="#f8fafc"/>
-        <rect x="10" y="41" width="42" height="10" rx="5" fill="#f8fafc"/>
+        <defs>
+          <linearGradient id="hatRed" x1="14" y1="14" x2="46" y2="44" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#dc2626"/>
+            <stop offset="100%" stop-color="#7f1d1d"/>
+          </linearGradient>
+        </defs>
+        <path d="M14 44C16 24 30 12 48 14C43 24 44 34 48 44H14Z" fill="url(#hatRed)"/>
+        <circle cx="51" cy="15" r="6" fill="#f1f5f9"/>
+        <rect x="10" y="41" width="42" height="10" rx="5" fill="#f1f5f9"/>
       </svg>
       <img class="logo" src="ms-logo.gif" alt="Maneesha Sathsara logo" width="144" height="90">
     </div>
@@ -276,29 +365,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     </div>
     <p class="when rise" style="animation-delay:.3s">1 January 2027, 12:00 am (Sri Lanka time)</p>
 
-    <!-- X-mas Gift Boxes (Click for a festive snow burst!) -->
-    <div class="gifts rise" id="giftBox" style="animation-delay:.4s" title="Click for Christmas magic!">
-      <svg width="136" height="58" viewBox="0 0 136 58" fill="none" aria-label="Christmas gifts">
-        <!-- Left Green Gift -->
-        <rect x="8" y="24" width="32" height="30" rx="4" fill="#1b4332" stroke="#2d6a4f" stroke-width="1.2"/>
-        <rect x="6" y="20" width="36" height="6" rx="2" fill="#2d6a4f"/>
-        <rect x="21" y="20" width="6" height="34" fill="#ffd166"/>
-        <path d="M24 20 C18 12, 13 16, 20 20 M24 20 C30 12, 35 16, 28 20" stroke="#ffd166" stroke-width="2.2" stroke-linecap="round"/>
-
-        <!-- Center Big Red Gift -->
-        <rect x="46" y="14" width="44" height="40" rx="5" fill="#c1121f" stroke="#e63946" stroke-width="1.2"/>
-        <rect x="43" y="9" width="50" height="7" rx="2.5" fill="#e63946"/>
-        <rect x="64" y="9" width="8" height="45" fill="#ffd166"/>
-        <path d="M68 9 C60 -1, 53 4, 63 9 M68 9 C76 -1, 83 4, 73 9" stroke="#ffd166" stroke-width="2.6" stroke-linecap="round"/>
-
-        <!-- Right Navy/Gold Gift -->
-        <rect x="96" y="26" width="30" height="28" rx="4" fill="#1d3557" stroke="#457b9d" stroke-width="1.2"/>
-        <rect x="94" y="22" width="34" height="6" rx="2" fill="#457b9d"/>
-        <rect x="108" y="22" width="6" height="32" fill="#ff4d6d"/>
-        <path d="M111 22 C105 14, 100 18, 107 22 M111 22 C117 14, 122 18, 115 22" stroke="#ff4d6d" stroke-width="2.2" stroke-linecap="round"/>
-      </svg>
-    </div>
-
     <div class="live">
       <p>The new portfolio is live.</p>
       <a class="btn" id="enter" href="">Enter the site</a>
@@ -311,7 +377,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <a href="Maneesha_Sathsara_CV.pdf">Download CV</a>
   </footer>
 </div>
-<noscript><p style="position:relative;z-index:2;text-align:center;padding:0 24px 24px;color:#8e9ab8">This page counts down to 1 January 2027, 12:00 am Sri Lanka time. Please enable JavaScript to see the timer.</p></noscript>
+<noscript><p style="position:relative;text-align:center;padding:0 24px 24px;color:#8e9ab8">This page counts down to 1 January 2027, 12:00 am Sri Lanka time. Please enable JavaScript to see the timer.</p></noscript>
 
 <script>
 (function(){
@@ -321,7 +387,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   var pad = function(n){return String(n).padStart(2,'0')};
   var launched = false;
 
-  /* countdown */
+  /* Countdown Timer */
   function launch(){
     if(launched) return; launched = true;
     document.body.classList.add('launched');
@@ -338,11 +404,12 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   }
   tick(); setInterval(tick, 1000);
 
-  /* falling snow + interactive sparkle burst on gift click */
-  var canvas = $('snow');
+  /* Realistic Multi-Layer Snow + Santa Perimeter Orbit + Stardust Trail */
+  var canvas = $('fx');
   var ctx = canvas.getContext('2d');
+  var santaEl = $('santaSleigh');
   var flakes = [];
-  var sparks = [];
+  var stardust = [];
   var w, h;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -353,78 +420,142 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   window.addEventListener('resize', resize);
   resize();
 
-  var count = Math.min(95, Math.floor(w / 14));
-  for(var i = 0; i < count; i++){
+  /* 3 Depth Layers of Snowflakes (Far, Mid, Near Bokeh) */
+  var totalFlakes = Math.min(130, Math.floor(w / 10));
+  for(var i = 0; i < totalFlakes; i++){
+    var depth = Math.random(); // 0 = far, 1 = close
     flakes.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      r: Math.random() * 2.6 + 1.1,
-      speed: Math.random() * 0.9 + 0.35,
-      drift: Math.random() * Math.PI * 2,
-      opacity: Math.random() * 0.55 + 0.25
+      r: 0.8 + depth * 2.8,
+      speedY: 0.28 + depth * 1.15,
+      windAmp: 0.2 + depth * 0.65,
+      phase: Math.random() * Math.PI * 2,
+      freq: 0.008 + Math.random() * 0.014,
+      alpha: 0.18 + depth * 0.55,
+      bokeh: depth > 0.78
     });
   }
 
-  var giftBox = $('giftBox');
-  if(giftBox){
-    giftBox.addEventListener('click', function(e){
-      var rect = giftBox.getBoundingClientRect();
-      var cx = rect.left + rect.width / 2;
-      var cy = rect.top + rect.height / 2;
-      var colors = ['#ffd166', '#ff4d6d', '#06d6a0', '#ffffff'];
-      for(var j = 0; j < 28; j++){
-        var angle = Math.random() * Math.PI * 2;
-        var vel = Math.random() * 4 + 1.5;
-        sparks.push({
-          x: cx, y: cy,
-          vx: Math.cos(angle) * vel,
-          vy: Math.sin(angle) * vel - 2,
-          life: 1,
-          color: colors[j % colors.length],
-          r: Math.random() * 2.5 + 1.5
+  /* Smooth Closed-Loop Flight Path All Around the Site Perimeter */
+  function getPerimeterPos(t){
+    // Superellipse (n=4) traces a smooth rounded rectangle around the whole screen
+    var cos = Math.cos(t);
+    var sin = Math.sin(t);
+    var n = 4;
+    var rx = Math.sign(cos) * Math.pow(Math.abs(cos), 2 / n);
+    var ry = Math.sign(sin) * Math.pow(Math.abs(sin), 2 / n);
+
+    var marginX = Math.max(85, w * 0.08);
+    var marginY = Math.max(65, h * 0.09);
+    var cx = w * 0.5;
+    var cy = h * 0.5;
+    var halfW = cx - marginX;
+    var halfH = cy - marginY;
+
+    // Add gentle organic wave so flight looks natural like wind currents
+    var waveY = Math.sin(t * 4) * 14;
+    var waveX = Math.cos(t * 3) * 12;
+
+    return {
+      x: cx + rx * halfW + waveX,
+      y: cy + ry * halfH + waveY
+    };
+  }
+
+  var orbitT = -Math.PI * 0.75; // Start top-left flying right
+  var frameCount = 0;
+
+  function animate(){
+    ctx.clearRect(0, 0, w, h);
+    frameCount++;
+
+    /* 1. Update & Draw Santa Sleigh Orbiting All Around the Site */
+    if(!reducedMotion && santaEl){
+      orbitT += 0.0032; // Smooth cinematic flight speed
+      var p1 = getPerimeterPos(orbitT);
+      var p2 = getPerimeterPos(orbitT + 0.012);
+      var dx = p2.x - p1.x;
+      var dy = p2.y - p1.y;
+      var movingRight = dx >= 0;
+
+      // Calculate natural pitch/tilt angle
+      var rawAngle = movingRight ? Math.atan2(dy, dx) : Math.atan2(-dy, -dx);
+      var deg = Math.max(-26, Math.min(26, rawAngle * (180 / Math.PI)));
+
+      var sw = santaEl.offsetWidth || 190;
+      var sh = santaEl.offsetHeight || 60;
+      var tx = p1.x - sw * 0.5;
+      var ty = p1.y - sh * 0.5;
+
+      santaEl.style.transform =
+        'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) ' +
+        'scaleX(' + (movingRight ? 1 : -1) + ') ' +
+        'rotate(' + deg.toFixed(1) + 'deg)';
+
+      // Emit realistic golden stardust particles from sleigh runners
+      if(frameCount % 2 === 0){
+        var tailOffsetX = movingRight ? -sw * 0.32 : sw * 0.32;
+        stardust.push({
+          x: p1.x + tailOffsetX + (Math.random() - 0.5) * 10,
+          y: p1.y + sh * 0.18 + (Math.random() - 0.5) * 8,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: 0.25 + Math.random() * 0.45,
+          r: Math.random() * 2 + 0.8,
+          life: 1
         });
       }
-    });
-  }
+    }
 
-  function drawSnow(){
-    ctx.clearRect(0, 0, w, h);
+    /* 2. Draw Golden Stardust Trail */
+    for(var s = stardust.length - 1; s >= 0; s--){
+      var pt = stardust[s];
+      ctx.save();
+      ctx.globalAlpha = pt.life * 0.85;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
+      ctx.fillStyle = pt.life > 0.5 ? '#fef08a' : '#f59e0b';
+      ctx.shadowColor = '#fbbf24';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.restore();
+
+      pt.x += pt.vx;
+      pt.y += pt.vy;
+      pt.life -= 0.016;
+      if(pt.life <= 0) stardust.splice(s, 1);
+    }
+
+    /* 3. Draw Realistic Multi-Depth Snowfall */
     for(var i = 0; i < flakes.length; i++){
       var f = flakes[i];
       ctx.beginPath();
-      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(242, 245, 251, ' + f.opacity + ')';
+      if(f.bokeh){
+        var grad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 1.4);
+        grad.addColorStop(0, 'rgba(242, 245, 251, ' + f.alpha + ')');
+        grad.addColorStop(1, 'rgba(242, 245, 251, 0)');
+        ctx.fillStyle = grad;
+        ctx.arc(f.x, f.y, f.r * 1.4, 0, Math.PI * 2);
+      } else {
+        ctx.fillStyle = 'rgba(242, 245, 251, ' + f.alpha + ')';
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      }
       ctx.fill();
 
       if(!reducedMotion){
-        f.y += f.speed;
-        f.drift += 0.015;
-        f.x += Math.sin(f.drift) * 0.45;
-        if(f.y > h + 5){ f.y = -5; f.x = Math.random() * w; }
-        if(f.x > w + 5) f.x = -5;
-        if(f.x < -5) f.x = w + 5;
+        f.y += f.speedY;
+        f.phase += f.freq;
+        f.x += Math.sin(f.phase) * f.windAmp;
+
+        if(f.y > h + 8){ f.y = -8; f.x = Math.random() * w; }
+        if(f.x > w + 8) f.x = -8;
+        if(f.x < -8) f.x = w + 8;
       }
     }
 
-    for(var k = sparks.length - 1; k >= 0; k--){
-      var sp = sparks[k];
-      ctx.save();
-      ctx.globalAlpha = sp.life;
-      ctx.beginPath();
-      ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
-      ctx.fillStyle = sp.color;
-      ctx.fill();
-      ctx.restore();
-      sp.x += sp.vx;
-      sp.y += sp.vy;
-      sp.vy += 0.08;
-      sp.life -= 0.022;
-      if(sp.life <= 0) sparks.splice(k, 1);
-    }
-
-    if(!reducedMotion) requestAnimationFrame(drawSnow);
+    if(!reducedMotion) requestAnimationFrame(animate);
   }
-  drawSnow();
+  animate();
 })();
 </script>
 </body>
